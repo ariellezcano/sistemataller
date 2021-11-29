@@ -1,9 +1,15 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { EntregaEquipoUnidades } from 'src/app/modelo/index.models';
-import { EntregaEquipoUnidadService } from 'src/app/servicio/componentes/entrega-equipo-unidad.service';
+import {
+  DatoPolicial,
+  Equipo,
+  EquipoIngreso,
+  Unidad,
+} from 'src/app/modelo/index.models';
+import { EquipoIngresoService } from 'src/app/servicio/componentes/equipo-ingreso.service';
 import { UturuncoUtils } from 'src/app/utils/uturuncoUtils';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-abm-ingreso-equipo',
@@ -19,17 +25,19 @@ export class AbmIngresoEquipoComponent implements OnInit {
   /*
    * control de operaciones a realizar
    */
-  entity = 'principal/equipo';
+  entity = 'lst-equipos';
 
   id!: number;
   procesando!: Boolean;
-  item: EntregaEquipoUnidades;
+  items: EquipoIngreso[];
+  item: EquipoIngreso;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private wsdl: EntregaEquipoUnidadService
+    private wsdl: EquipoIngresoService
   ) {
-    this.item = new EntregaEquipoUnidades();
+    this.items = [];
+    this.item = new EquipoIngreso();
   }
 
   ngOnInit(): void {
@@ -61,6 +69,28 @@ export class AbmIngresoEquipoComponent implements OnInit {
       this.doEdit();
     } else {
       this.doCreate();
+    }
+  }
+
+  personasEncontrados(event: DatoPolicial) {
+    if (event.id !== undefined) {
+      this.item.ingresoEntrega = event.persona;
+    } else {
+      Swal.fire('Seleccione Persona');
+    }
+  }
+  equiposEncontrados(event: Equipo) {
+    if (event.id !== undefined) {
+      this.item.equipo = event;
+    } else {
+      Swal.fire('Seleccione Equipo');
+    }
+  }
+  unidadesEncontradas(event: Unidad) {
+    if (event.id !== undefined) {
+      this.item.unidad = event;
+    } else {
+      Swal.fire('Seleccione unidad');
     }
   }
 
@@ -109,6 +139,15 @@ export class AbmIngresoEquipoComponent implements OnInit {
     } catch (error: any) {
       UturuncoUtils.showToas('Excepción: ' + error.message, 'error');
     }
+  }
+  //agregar la fila en memoria
+  addRow() {
+    this.items.unshift(this.item);
+    this.item = new EquipoIngreso();
+  }
+  //elimina la fila en memoria
+  deleteRow(indice: any) {
+    this.items.splice(indice, 1);
   }
 
   back() {

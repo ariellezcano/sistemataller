@@ -1,24 +1,16 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { EquipoReparacion } from 'src/app/modelo/componentes/equipoReparacion';
-import {
-  EntregaEquipoUnidades,
-  EquipoIngreso,
-} from 'src/app/modelo/index.models';
-import { EntregaEquipoUnidadService } from 'src/app/servicio/componentes/entrega-equipo-unidad.service';
+import { Router } from '@angular/router';
+import { EquipoIngreso } from 'src/app/modelo/index.models';
 import { EquipoIngresoService } from 'src/app/servicio/componentes/equipo-ingreso.service';
-import { EquipoReparacionService } from 'src/app/servicio/componentes/equipo-reparacion.service';
 import { UturuncoUtils } from 'src/app/utils/uturuncoUtils';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-lst-equipos',
-  templateUrl: './lst-equipos.component.html',
-  styleUrls: ['./lst-equipos.component.scss'],
+  selector: 'app-lst-impresoras',
+  templateUrl: './lst-impresoras.component.html',
+  styleUrls: ['./lst-impresoras.component.scss'],
 })
-export class LstEquiposComponent implements OnInit {
-  // @ViewChild(FilEquipoComponent, { static: true })
-  //fil!: FilEquipoComponent;
+export class LstImpresorasComponent implements OnInit {
   @ViewChild('close')
   cerrar!: ElementRef;
 

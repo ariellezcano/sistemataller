@@ -1,17 +1,17 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { UturuncoUtils } from '../../utils/uturuncoUtils';
+import { UturuncoUtils } from 'src/app/utils/uturuncoUtils';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
-export class PersonaService {
+export class EquipoDevolucionService {
   other_header: any;
   api;
 
   constructor(private http: HttpClient) {
-    this.api = environment.URL + 'persona/';
+    this.api = environment.URL + 'comuEquipoDevolucion/';
   }
   /* particularidad de la entidad */
 

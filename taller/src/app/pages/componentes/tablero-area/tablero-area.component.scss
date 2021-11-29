@@ -1,0 +1,33 @@
+.social-box .box {
+  border-radius: 10px;
+  padding: 40px 10px;
+  margin: 20px 0px;
+  cursor: pointer;
+  transition: all 0.5s ease-out;
+}
+
+.social-box .box:hover {
+  box-shadow: 0 0 7px rgb(75, 65, 215);
+  background-color: rgb(70, 153, 185);
+}
+
+.social-box .box .box-text {
+  margin: 20px 0px;
+  font-size: 15px;
+  line-height: 30px;
+  color: black;
+}
+
+.social-box .box .box-btn a {
+  text-decoration: none;
+  color: #4183d7;
+  font-size: 16px;
+  color: black;
+}
+
+.fa {
+  color: #4183d7;
+}
+.box-title {
+  color: blue;
+}

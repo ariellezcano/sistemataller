@@ -8,7 +8,7 @@ export { TipoEquipo } from './componentes/tipoEquipo';
 export { Usuario } from './componentes/usuario';
 export { Equipo } from './componentes/equipo';
 export { EntregaEquipoUnidades } from './componentes/entregaEquipoUnidades';
-export { EstadoEquipo } from './componentes/estadoEquipo'
+export { EstadoEquipo } from './componentes/estadoEquipo';
 export { Jerarquia } from './componentes/jerarquia';
 export { Unidad } from './componentes/unidad';
 export { DatoPolicial } from './componentes/datoPolicial';
@@ -17,3 +17,6 @@ export { Escalafon } from './componentes/escalafon';
 export { Roles } from './componentes/roles';
 export { Vehiculo } from './componentes/vehiculo';
 export { DetalleEquipos } from './componentes/detalleEquipos';
+export { EquipoIngreso } from './componentes/equipoIngreso';
+export { Diagnostico } from './componentes/diagnostico';
+export { DiagnosticoEquipo } from './componentes/diagnosticoEquipo';
