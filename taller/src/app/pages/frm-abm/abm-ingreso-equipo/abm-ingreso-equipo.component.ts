@@ -1,13 +1,17 @@
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
   DatoPolicial,
+  EntregaEquipoUnidades,
   Equipo,
-  EquipoIngreso,
+  ComIngresoEquipo,
   Unidad,
+  OrdenTrabajo,
 } from 'src/app/modelo/index.models';
 import { EquipoIngresoService } from 'src/app/servicio/componentes/equipo-ingreso.service';
+import { OrdenTrabajoService } from 'src/app/servicio/componentes/orden-trabajo.service';
 import { UturuncoUtils } from 'src/app/utils/uturuncoUtils';
 import Swal from 'sweetalert2';
 
@@ -29,15 +33,18 @@ export class AbmIngresoEquipoComponent implements OnInit {
 
   id!: number;
   procesando!: Boolean;
-  items: EquipoIngreso[];
-  item: EquipoIngreso;
+  dtItems: ComIngresoEquipo[];
+  dtItem: ComIngresoEquipo;
+  item: OrdenTrabajo;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private wsdl: EquipoIngresoService
+    private wsdl: OrdenTrabajoService,
+    private wsdlE: EquipoIngresoService
   ) {
-    this.items = [];
-    this.item = new EquipoIngreso();
+    this.dtItems = [];
+    this.dtItem = new ComIngresoEquipo();
+    this.item = new OrdenTrabajo();
   }
 
   ngOnInit(): void {
@@ -52,18 +59,18 @@ export class AbmIngresoEquipoComponent implements OnInit {
         let data = await this.wsdl.doFind(this.id).then();
         let res = JSON.parse(JSON.stringify(data));
         if (res.status == 200) {
-          this.item = res.data;
-          console.log(this.item);
+          this.dtItem = res.data;
+          console.log(this.dtItem);
         }
       } else {
-        //this.item = new Equipo();
+        //this.dtItem = new Equipo();
       }
     } catch (error) {
       UturuncoUtils.showToas('Error inesperado', 'error');
     }
   }
 
-  doAction(f: NgForm) {
+  doAction() {
     /* validar */
     if (this.item.id > 0) {
       this.doEdit();
@@ -75,17 +82,28 @@ export class AbmIngresoEquipoComponent implements OnInit {
   personasEncontrados(event: DatoPolicial) {
     if (event.id !== undefined) {
       this.item.ingresoEntrega = event.persona;
+      this.item.ingresoRecibe = event.persona;
     } else {
       Swal.fire('Seleccione Persona');
     }
   }
   equiposEncontrados(event: Equipo) {
     if (event.id !== undefined) {
-      this.item.equipo = event;
+      this.dtItem.equipo = event;
     } else {
       Swal.fire('Seleccione Equipo');
     }
   }
+  // equiposEncontrados(event: EntregaEquipoUnidades) {
+  //   if (event.id !== undefined) {
+  //     this.dtItem = new EquipoIngreso();
+  //     this.dtItem.equipo = event.equipo;
+  //     this.dtItem.unidad = event.unidad;
+  //   } else {
+  //     Swal.fire('Seleccione Equipo');
+  //   }
+  // }
+
   unidadesEncontradas(event: Unidad) {
     if (event.id !== undefined) {
       this.item.unidad = event;
@@ -97,7 +115,7 @@ export class AbmIngresoEquipoComponent implements OnInit {
   async doEdit() {
     try {
       this.procesando = true;
-      const res = await this.wsdl.doUpdate(this.item, this.item.id).then();
+      const res = await this.wsdl.doUpdate(this.dtItem, this.dtItem.id).then();
       const result = JSON.parse(JSON.stringify(res));
       if (result.status == 200) {
         UturuncoUtils.showToas('Se actualizado correctamente', 'success');
@@ -117,37 +135,53 @@ export class AbmIngresoEquipoComponent implements OnInit {
   async doCreate() {
     try {
       this.procesando = true;
-      this.item.unidad.id = 1;
-      // this.item.unidad.regional.id = 1;
-
+      this.back();
       console.log('datos', this.item);
-      const res = await this.wsdl.doInsert(this.item).then();
-      this.procesando = false;
-      console.log('datos', res);
-      const result = JSON.parse(JSON.stringify(res));
+      // const res = await this.wsdl.doInsert(this.item).then();
+      // this.procesando = false;
+      // console.log('datos', res);
+      // const result = JSON.parse(JSON.stringify(res));
 
-      if (result.status == 200) {
-        //this.item = result.status;
-        UturuncoUtils.showToas('Se creo correctamente', 'success');
-        this.back();
-        this.finalizado.emit(true);
-      } else if (result.status == 666) {
-        // logout app o refresh token
-      } else {
-        UturuncoUtils.showToas(result.msg, 'error');
-      }
+      // if (result.status == 200) {
+      //   //this.dtItem = result.status;
+      //   UturuncoUtils.showToas('Se creo correctamente', 'success');
+      //   this.back();
+      //   this.finalizado.emit(true);
+      // } else if (result.status == 666) {
+      //   // logout app o refresh token
+      // } else {
+      //   UturuncoUtils.showToas(result.msg, 'error');
+      // }
     } catch (error: any) {
       UturuncoUtils.showToas('Excepción: ' + error.message, 'error');
     }
   }
   //agregar la fila en memoria
   addRow() {
-    this.items.unshift(this.item);
-    this.item = new EquipoIngreso();
+    this.dtItems.unshift(this.dtItem);
+    this.dtItem = new ComIngresoEquipo();
   }
   //elimina la fila en memoria
   deleteRow(indice: any) {
-    this.items.splice(indice, 1);
+    this.dtItems.splice(indice, 1);
+  }
+  area(value: any) {
+    let valor = '';
+    switch (value) {
+      case 'INF':
+        valor = 'INFORMATICA';
+        break;
+      case 'COM':
+        valor = 'COMUNICACIONES';
+        break;
+      case 'IMP':
+        valor = 'IMPRESORAS';
+        break;
+      default:
+        valor = 'SIN AREA';
+        break;
+    }
+    return valor;
   }
 
   back() {

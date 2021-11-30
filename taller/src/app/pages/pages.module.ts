@@ -18,6 +18,8 @@ import { TableroAreaComponent } from './componentes/tablero-area/tablero-area.co
 import { LstComunicacionesComponent } from './lst/lst-comunicaciones/lst-comunicaciones.component';
 import { LstInformaticaComponent } from './lst/lst-informatica/lst-informatica.component';
 import { LstImpresorasComponent } from './lst/lst-impresoras/lst-impresoras.component';
+import { FilEquipoReparacionComponent } from './filtros/fil-equipo-reparacion/fil-equipo-reparacion.component';
+import { FilEntregaUnidadComponent } from './filtros/fil-entrega-unidad/fil-entrega-unidad.component';
 
 @NgModule({
   declarations: [
@@ -26,16 +28,21 @@ import { LstImpresorasComponent } from './lst/lst-impresoras/lst-impresoras.comp
     WgPaginateComponent,
     NavComponent,
     FooterComponent,
-    LstEquiposComponent,
-    AbmIngresoEquipoComponent,
     PrincipalComponent,
+    TableroAreaComponent,
+    AbmIngresoEquipoComponent,
+
     FilPersonaComponent,
     FiltroEquipoComponent,
     FiltrounidadComponent,
-    TableroAreaComponent,
+    FilEntregaUnidadComponent,
+    FilEquipoReparacionComponent,
+
     LstComunicacionesComponent,
     LstInformaticaComponent,
     LstImpresorasComponent,
+    LstEquiposComponent,
+
     //declarar paginas de pages
   ],
   exports: [],

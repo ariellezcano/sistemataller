@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { EquipoIngreso } from 'src/app/modelo/index.models';
+import { ComIngresoEquipo } from 'src/app/modelo/index.models';
 import { EquipoIngresoService } from 'src/app/servicio/componentes/equipo-ingreso.service';
 import { UturuncoUtils } from 'src/app/utils/uturuncoUtils';
 import Swal from 'sweetalert2';
@@ -15,8 +15,8 @@ export class LstImpresorasComponent implements OnInit {
   cerrar!: ElementRef;
 
   exportar: boolean = false;
-  items: EquipoIngreso[];
-  item: EquipoIngreso;
+  items: ComIngresoEquipo[];
+  item: ComIngresoEquipo;
 
   procesando!: Boolean;
   public load!: boolean;
@@ -24,14 +24,14 @@ export class LstImpresorasComponent implements OnInit {
   entidad = 'lst-equipos';
   constructor(private wsdl: EquipoIngresoService, private router: Router) {
     this.load = false;
-    this.item = new EquipoIngreso();
+    this.item = new ComIngresoEquipo();
     this.items = [];
   }
 
   ngOnInit(): void {}
 
-  preDelete(item: EquipoIngreso) {
-    this.item = new EquipoIngreso();
+  preDelete(item: ComIngresoEquipo) {
+    this.item = new ComIngresoEquipo();
     this.item = item;
 
     Swal.fire({
@@ -73,7 +73,7 @@ export class LstImpresorasComponent implements OnInit {
   }
 
   cancel() {
-    this.item = new EquipoIngreso();
+    this.item = new ComIngresoEquipo();
     //this.fil.list();
   }
 

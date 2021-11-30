@@ -1,10 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { EquipoReparacion } from 'src/app/modelo/componentes/equipoReparacion';
-import {
-  EntregaEquipoUnidades,
-  EquipoIngreso,
-} from 'src/app/modelo/index.models';
+import { Router } from '@angular/router';
+import { ComIngresoEquipo } from 'src/app/modelo/index.models';
 import { EntregaEquipoUnidadService } from 'src/app/servicio/componentes/entrega-equipo-unidad.service';
 import { EquipoIngresoService } from 'src/app/servicio/componentes/equipo-ingreso.service';
 import { EquipoReparacionService } from 'src/app/servicio/componentes/equipo-reparacion.service';
@@ -23,8 +19,8 @@ export class LstEquiposComponent implements OnInit {
   cerrar!: ElementRef;
 
   exportar: boolean = false;
-  items: EquipoIngreso[];
-  item: EquipoIngreso;
+  items: ComIngresoEquipo[];
+  item: ComIngresoEquipo;
 
   procesando!: Boolean;
   public load!: boolean;
@@ -32,14 +28,14 @@ export class LstEquiposComponent implements OnInit {
   entidad = 'lst-equipos';
   constructor(private wsdl: EquipoIngresoService, private router: Router) {
     this.load = false;
-    this.item = new EquipoIngreso();
+    this.item = new ComIngresoEquipo();
     this.items = [];
   }
 
   ngOnInit(): void {}
 
-  preDelete(item: EquipoIngreso) {
-    this.item = new EquipoIngreso();
+  preDelete(item: ComIngresoEquipo) {
+    this.item = new ComIngresoEquipo();
     this.item = item;
 
     Swal.fire({
@@ -81,7 +77,7 @@ export class LstEquiposComponent implements OnInit {
   }
 
   cancel() {
-    this.item = new EquipoIngreso();
+    this.item = new ComIngresoEquipo();
     //this.fil.list();
   }
 
@@ -145,5 +141,8 @@ export class LstEquiposComponent implements OnInit {
     } else {
       return console.log('no hay mas de 10');
     }
+  }
+  doFound(event: ComIngresoEquipo[]) {
+    this.items = event;
   }
 }
