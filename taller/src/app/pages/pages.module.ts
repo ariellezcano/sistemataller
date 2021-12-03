@@ -20,6 +20,9 @@ import { LstInformaticaComponent } from './lst/lst-informatica/lst-informatica.c
 import { LstImpresorasComponent } from './lst/lst-impresoras/lst-impresoras.component';
 import { FilEquipoReparacionComponent } from './filtros/fil-equipo-reparacion/fil-equipo-reparacion.component';
 import { FilEntregaUnidadComponent } from './filtros/fil-entrega-unidad/fil-entrega-unidad.component';
+import { ReporteMovilesComponent } from './componentes/reporte-moviles/reporte-moviles.component';
+import { ReporteExternoComponent } from './componentes/reporte-externo/reporte-externo.component';
+import { AbmReporteMovilComponent } from './frm-abm/abm-reporte-movil/abm-reporte-movil.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +45,9 @@ import { FilEntregaUnidadComponent } from './filtros/fil-entrega-unidad/fil-entr
     LstInformaticaComponent,
     LstImpresorasComponent,
     LstEquiposComponent,
+    ReporteMovilesComponent,
+    ReporteExternoComponent,
+    AbmReporteMovilComponent,
 
     //declarar paginas de pages
   ],

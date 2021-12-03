@@ -36,6 +36,7 @@ export class AbmIngresoEquipoComponent implements OnInit {
   dtItems: ComIngresoEquipo[];
   dtItem: ComIngresoEquipo;
   item: OrdenTrabajo;
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -71,18 +72,47 @@ export class AbmIngresoEquipoComponent implements OnInit {
   }
 
   doAction() {
+    this.item.ingresoRecibe = JSON.parse('' + UturuncoUtils.getSession('user'));
     /* validar */
-    if (this.item.id > 0) {
-      this.doEdit();
-    } else {
+    if (this.item.id == undefined) {
       this.doCreate();
     }
   }
 
+  crearDetalleEquipo() {
+    this.dtItems.forEach((e) => {
+      if (e.id == undefined) {
+        this.dtItem = new ComIngresoEquipo();
+        e.ordenTrabajo.id = this.item.id;
+        this.dtItem = e;
+
+        // try {
+        //   this.procesando = true;
+        //   // const res = await this.wsdl.doInsert(this.dtItem).then();
+        //   // this.procesando = false;
+        //   // console.log('datos', res);
+        //   // const result = JSON.parse(JSON.stringify(res));
+
+        //   // if (result.status == 200) {
+        //   //   //this.dtItem = result.status;
+        //   //   //UturuncoUtils.showToas('Se creo correctamente', 'success');
+        //   //   //this.back();
+        //   //   this.finalizado.emit(true);
+        //   // } else if (result.status == 666) {
+        //   //   // logout app o refresh token
+        //   // } else {
+        //   //   UturuncoUtils.showToas(result.msg, 'error');
+        //   // }
+        // } catch (error: any) {
+        //   UturuncoUtils.showToas('Excepción: ' + error.message, 'error');
+        // }
+      }
+    });
+  }
   personasEncontrados(event: DatoPolicial) {
     if (event.id !== undefined) {
       this.item.ingresoEntrega = event.persona;
-      this.item.ingresoRecibe = event.persona;
+      //this.item.ingresoRecibe = event.persona;
     } else {
       Swal.fire('Seleccione Persona');
     }
@@ -135,7 +165,6 @@ export class AbmIngresoEquipoComponent implements OnInit {
   async doCreate() {
     try {
       this.procesando = true;
-      this.back();
       console.log('datos', this.item);
       // const res = await this.wsdl.doInsert(this.item).then();
       // this.procesando = false;
@@ -144,6 +173,7 @@ export class AbmIngresoEquipoComponent implements OnInit {
 
       // if (result.status == 200) {
       //   //this.dtItem = result.status;
+      //crearDetalleEquipo()
       //   UturuncoUtils.showToas('Se creo correctamente', 'success');
       //   this.back();
       //   this.finalizado.emit(true);
@@ -158,7 +188,9 @@ export class AbmIngresoEquipoComponent implements OnInit {
   }
   //agregar la fila en memoria
   addRow() {
+    //this.dtItem.ordenTrabajo = this.item;
     this.dtItems.unshift(this.dtItem);
+    console.log('addrow', this.dtItem);
     this.dtItem = new ComIngresoEquipo();
   }
   //elimina la fila en memoria
@@ -178,7 +210,7 @@ export class AbmIngresoEquipoComponent implements OnInit {
         valor = 'IMPRESORAS';
         break;
       default:
-        valor = 'SIN AREA';
+        valor = 'AREA SIN ESPECIFICAR';
         break;
     }
     return valor;

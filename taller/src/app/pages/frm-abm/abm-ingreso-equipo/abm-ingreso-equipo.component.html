@@ -72,8 +72,8 @@
           oninvalid="setCustomValidity('El campo es obligatorio')"
           oninput="setCustomValidity('')"
           [(ngModel)]="dtItem.area"
-          name="tipoAlta"
-          id="tipoAlta"
+          name="area"
+          id="area"
           required
         >
           <option value="INF">INFORMATICA</option>
@@ -82,7 +82,6 @@
         </select>
       </div>
     </div>
-    <div class="row"></div>
 
     <div class="row">
       <div class="form-group col-md-12">
@@ -108,9 +107,9 @@
           <textarea
             [(ngModel)]="dtItem.observaciones"
             class="form-control"
-            name="descripcionIngreso"
+            name="observaciones"
             placeholder="Observaciones del equipo"
-            id="descripcionIngreso"
+            id="observaciones"
           ></textarea>
         </div>
       </div>
@@ -130,8 +129,6 @@
         </button>
       </div>
     </div>
-    <legend>{{ item.nroOrden }}</legend>
-
     <div class="row" *ngIf="dtItems.length > 0; mostrar">
       <table #mostrar id="tabla" class="table">
         <thead class="text-center table-primary">

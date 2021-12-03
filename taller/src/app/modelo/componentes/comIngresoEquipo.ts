@@ -8,7 +8,6 @@ export class ComIngresoEquipo {
   id!: number;
   ordenTrabajo!: OrdenTrabajo;
   equipo: Equipo;
-  unidad: Unidad;
   area!: string; //informatica, comunicaciones, impresoras
   fallaMencionada!: string;
   observaciones!: string; //observacion
@@ -20,7 +19,6 @@ export class ComIngresoEquipo {
   constructor() {
     this.ordenTrabajo = new OrdenTrabajo();
     this.equipo = new Equipo();
-    this.unidad = new Unidad();
     this.activo = true;
   }
 }
