@@ -1,10 +1,7 @@
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
   DatoPolicial,
-  EntregaEquipoUnidades,
   Equipo,
   ComIngresoEquipo,
   Unidad,
