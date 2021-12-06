@@ -1,13 +1,21 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import * as moment from 'moment';
+import { Movil } from 'src/app/modelo/componentes/movil';
 import { ReporteMovil } from 'src/app/modelo/componentes/reporte-movil';
-import { DatoPolicial, Equipo, Unidad } from 'src/app/modelo/index.models';
+import {
+  DatoPolicial,
+  Equipo,
+  Unidad,
+  Vehiculo,
+} from 'src/app/modelo/index.models';
 import {
   EquipoService,
   PersonaService,
   UnidadService,
   VehiculosService,
 } from 'src/app/servicio/index.service';
+import { UturuncoUtils } from 'src/app/utils/uturuncoUtils';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -97,6 +105,10 @@ export class AbmReporteMovilComponent implements OnInit {
       Swal.fire('Seleccione Equipo');
     }
   }
+  vehiculoE(event: Vehiculo) {
+    console.log('evento movil', event);
+    this.item.movil = event;
+  }
   // equiposEncontrados(event: EntregaEquipoUnidades) {
   //   if (event.id !== undefined) {
   //     this.dtItem = new EquipoIngreso();
@@ -161,11 +173,13 @@ export class AbmReporteMovilComponent implements OnInit {
   // }
   //agregar la fila en memoria
   addRow() {
-    if (this.items.length < 0) {
+    console.log('items', this.items);
+    if (!this.items.length) {
+      this.item.entrega = JSON.parse('' + UturuncoUtils.getSession('personal'));
       this.items.unshift(this.item);
+      this.item = new ReporteMovil();
     } else {
       Swal.fire('Debe Agregar solo los datos que aparece en pantalla');
-      this.item = new ReporteMovil();
     }
   }
   //elimina la fila en memoria
@@ -196,5 +210,22 @@ export class AbmReporteMovilComponent implements OnInit {
   }
   getProceso() {
     return this.procesando;
+  }
+  fecha(fecha: Date) {
+    console.log(fecha);
+
+    var fecha_formateada = moment(moment(fecha).toDate())
+      .locale('es')
+      .format('DD/MM/YYYY HH:mm');
+    return fecha_formateada;
+  }
+  fecha1(fecha: Date) {
+    var fecha_formateada = moment(moment(fecha).toDate())
+      .locale('es')
+      .format('l' + ' ' + 'LT');
+    return fecha_formateada;
+  }
+  imprimir() {
+    window.print();
   }
 }

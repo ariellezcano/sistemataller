@@ -1,183 +1,217 @@
-<div class="row">
-  <div class="col-md-12">
-    <h2><b>Ingreso de Equipo</b></h2>
-    <!-- <form
+<ng-container *ngIf="!items.length; then mostrar1; else noMostrar">
+</ng-container>
+<ng-template #mostrar1>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h2><b>DATOS PARA GENERAR EL REPORTE:</b></h2>
+        <!-- <form
         #f="ngForm"
         (ngSubmit)="doAction(f)"
         ngNativeValidate
         class="was-validated"
       > -->
-    <hr />
-    <div class="row">
-      <!-- Fecha Ingreso del equipo -->
-      <div class="form-group col-md-6">
-        <label for="title">Fecha Ingreso del móvil</label>
-        <input
-          class="form-control"
-          type="date"
-          oninvalid="setCustomValidity('El campo es obligatorio')"
-          oninput="setCustomValidity('')"
-          id="fechaReparacion"
-          name="fechaReparacion"
-          [(ngModel)]="item.fechaReparacion"
-          required
-        />
-      </div>
-
-      <div class="form-group col-md-6" required>
-        <app-filtrounidad
-          [dibujar]="item.unidad"
-          (resultado)="unidadesEncontradas($event)"
-        ></app-filtrounidad>
-      </div>
-    </div>
-    <div class="row">
-        <div class="form-group col-md-6" required>
+        <hr />
+        <div class="row">
+          <!-- Fecha Ingreso del equipo -->
+          <div class="form-group col-md-6">
+            <label for="title">Fecha Ingreso para reparación</label>
+            <input
+              class="form-control"
+              type="datetime-local"
+              oninvalid="setCustomValidity('El campo es obligatorio')"
+              oninput="setCustomValidity('')"
+              id="fechaReparacion"
+              name="fechaReparacion"
+              [(ngModel)]="item.fechaReparacion"
+              required
+            />
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-md-6" required>
+            <label for="">Técnico interviniente</label>
+            <app-fil-persona
+              [dibujar]="item.tecnico"
+              (resultado)="tecnicoEncontrados($event)"
+            ></app-fil-persona>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-md-6" required>
+            <label for="">Unidad perteneciente</label>
+            <app-filtrounidad
+              [dibujar]="item.unidad"
+              (resultado)="unidadesEncontradas($event)"
+            ></app-filtrounidad>
+          </div>
+          <div class="form-group col-md-6" required>
             <app-filtro-equipo
               [dibujar]="item.equipo"
               (resultado)="equiposEncontrados($event)"
             ></app-filtro-equipo>
-          </div>  
-    </div>
-      <div class="form-group col-md-4">
-        <label for="title">Número de nota</label>
-        <input
-          class="form-control"
-          type="text"
-          oninvalid="setCustomValidity('El campo es obligatorio')"
-          oninput="setCustomValidity('')"
-          id="notaNro"
-          name="notaNro"
-          placeholder="Ingrese número de nota"
-          [(ngModel)]="item.notaNro"
-          required
-        />
-      </div>
-      <!-- persona que trae -->
-      <div class="form-group col-md-6" required>
-        <app-fil-persona
-          [dibujar]="item.ingresoEntrega"
-          (resultado)="personasEncontrados($event)"
-        ></app-fil-persona>
-      </div>
-    </div>
-
-    <hr class="hr" />
-    <div class="row">
-      <!-- equipo -->
-
-      <div class="form-group col-md-6" required>
-        <app-filtro-equipo
-          [dibujar]="dtItem.equipo"
-          (resultado)="equiposEncontrados($event)"
-        ></app-filtro-equipo>
-      </div>
-      <div class="form-group col-md-4">
-        <label for="title">Area Perteneciente</label>
-        <select
-          class="form-control"
-          data-style="btn-primary"
-          oninvalid="setCustomValidity('El campo es obligatorio')"
-          oninput="setCustomValidity('')"
-          [(ngModel)]="dtItem.area"
-          name="area"
-          id="area"
-          required
-        >
-          <option value="INF">INFORMATICA</option>
-          <option value="COM">COMUNICACIONES</option>
-          <option value="IMP">IMPRESORA</option>
-        </select>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="form-group col-md-12">
-        <label for="title">Falla Mencionada</label>
-        <input
-          class="form-control"
-          type="text"
-          oninvalid="setCustomValidity('El campo es obligatorio')"
-          oninput="setCustomValidity('')"
-          id="fallaMencionada"
-          name="fallaMencionada"
-          placeholder="Ingrese falla del equipo"
-          [(ngModel)]="dtItem.fallaMencionada"
-          required
-        />
-      </div>
-    </div>
-    <div class="row">
-      <!-- Observaciones -->
-      <div class="form-group col-md-12">
-        <div class="form-floating">
-          <label for="floatingTextarea">Observaciones</label>
-          <textarea
-            [(ngModel)]="dtItem.observaciones"
-            class="form-control"
-            name="observaciones"
-            placeholder="Observaciones del equipo"
-            id="observaciones"
-          ></textarea>
+          </div>
         </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="form-group col-md-12">
-        <button
-          id="boton"
-          type="button"
-          title="Guardar"
-          placement="top"
-          (click)="addRow()"
-          show-delay="10"
-          class="btn btn-warning btn-lg btn-block float-left"
-        >
-          <i class="fas fa-plus"></i>
-        </button>
-      </div>
-    </div>
-    <div class="row" *ngIf="dtItems.length > 0; mostrar">
-      <table #mostrar id="tabla" class="table">
-        <thead class="text-center table-primary">
-          <tr>
-            <th>Tipo Equipo</th>
-            <th>Marca-Modelo</th>
-            <th>Falla informada</th>
-            <th>Area</th>
-            <th>Acción</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let item of dtItems" class="text-center">
-            <td>{{ item.equipo.tipoEquipo.nombre }}</td>
-            <td>
-              {{ item.equipo.modelo.marca.nombre }} -
-              {{ item.equipo.modelo.nombre }}
-            </td>
-            <td>{{ item.fallaMencionada }}</td>
-            <td>{{ area(item.area) }}</td>
-            <td>
+        <div class="row">
+          <!-- movil   -->
+          <div class="form-group col-md-6">
+            <app-fil-movil
+              [dibujar]="item.movil"
+              (resultado)="vehiculoE($event)"
+            ></app-fil-movil>
+          </div>
+          <div class="form-group col-md-6" required>
+            <label for="">Personal a cargo del móvil</label>
+            <app-fil-persona
+              [dibujar]="item.recibi"
+              (resultado)="recibiEncontrada($event)"
+            ></app-fil-persona>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-md-12">
+            <label for="title">Estado inicial</label>
+            <input
+              class="form-control"
+              type="text"
+              oninvalid="setCustomValidity('El campo es obligatorio')"
+              oninput="setCustomValidity('')"
+              id="notaNro"
+              name="notaNro"
+              placeholder="Ingrese estado del vehículo en el que ingreso"
+              [(ngModel)]="item.estadoInicial"
+              required
+            />
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-md-12">
+            <div class="form-floating">
+              <label for="floatingTextarea">Acciones realizadas</label>
+              <textarea
+                [(ngModel)]="item.accionesRealizadas"
+                class="form-control"
+                name="accionesRealizadas"
+                placeholder="Acciones realizadas"
+                id="accionesRealizadas"
+              ></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-md-12">
+            <div class="form-floating">
+              <label for="floatingTextarea">Materiales utilizados</label>
+              <textarea
+                [(ngModel)]="item.materialesUtilizados"
+                class="form-control"
+                name="materialesUtilizados"
+                placeholder="Materiales"
+                id="materialesUtilizados"
+              ></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <!-- Observaciones -->
+          <div class="form-group col-md-12">
+            <div class="form-floating">
+              <label for="floatingTextarea">Observaciones</label>
+              <textarea
+                [(ngModel)]="item.observaciones"
+                class="form-control"
+                name="observaciones"
+                placeholder="Observaciones del equipo"
+                id="observaciones"
+              ></textarea>
+            </div>
+          </div>
+        </div>
+        <hr class="hr" />
+        <ng-container
+          *ngIf="!items.length; then mostrar; else nomostrar"
+        ></ng-container>
+        <ng-template #mostrar>
+          <div class="row">
+            <div class="form-group col-md-12">
               <button
+                id="boton"
                 type="button"
-                title="Eliminar de la lista"
+                title="Guardar"
+                placement="top"
+                (click)="addRow()"
+                show-delay="10"
+                class="btn btn-warning btn-lg btn-block float-left"
+              >
+                <i class="fa fa-download" aria-hidden="true"></i>
+              </button>
+            </div>
+          </div>
+        </ng-template>
+        <ng-template #nomostrar>
+          <div class="row">
+            <div class="form-group col-md-12">
+              <button
+                id="boton"
+                type="button"
+                title="Guardar"
                 placement="top"
                 show-delay="10"
-                (click)="deleteRow(item)"
-                class="btn btn-danger btn-sm btn-redondo"
+                class="btn btn-secondary btn-lg btn-block float-left"
               >
-                <i class="fas fa-calendar-times"></i>
+                <i class="fa fa-print" aria-hidden="true"
+                  >GENERAR ORDEN DE SERVICIO</i
+                >
               </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+            </div>
+          </div>
+        </ng-template>
 
-    <hr />
-    <div class="form-group">
-      <button
-        *ngIf="dtItems.length > 0; mostrar"
+        <div class="row" *ngIf="items.length > 0; mostrar">
+          <table #mostrar id="tabla" class="table">
+            <thead class="text-center table-primary">
+              <tr>
+                <th>Unidad</th>
+                <th>Fecha reparacion</th>
+                <th>Falla informada</th>
+                <th>Equipo</th>
+                <th>Serie n°</th>
+                <th>Técnico interviniente</th>
+                <th>Acción</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of items" class="text-center">
+                <td>{{ item.unidad.nombre }}</td>
+                <td>{{ item.fechaReparacion }}</td>
+                <td>{{ item.estadoInicial }}</td>
+                <td>
+                  {{ item?.equipo?.modelo?.marca?.nombre }} -
+                  {{ item?.equipo?.modelo?.nombre }}
+                </td>
+                <td>{{ item.equipo.nroSerie }}</td>
+                <td>{{ item.tecnico.apellido }},{{ item.tecnico.nombre }}</td>
+                <td>
+                  <button
+                    type="button"
+                    title="Eliminar de la lista"
+                    placement="top"
+                    show-delay="10"
+                    (click)="deleteRow(item)"
+                    class="btn btn-danger btn-sm btn-redondo"
+                  >
+                    <i class="fas fa-calendar-times"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <hr />
+        <div class="form-group">
+          <!-- <button
+        *ngIf="items.length > 0; mostrar"
         type="submit"
         (click)="doAction()"
         [disabled]="procesando"
@@ -189,12 +223,215 @@
         <ng-template #mostrar>
           <i class="fa fa-spinner fa-spin" aria-hidden="true"></i>
         </ng-template>
-      </button>
-      &nbsp;
-      <a (click)="back()" #cerrar class="btn btn-info btn-lg btn-block">
-        <i class="fas fa-arrow-left"></i> Volver
-      </a>
+      </button> -->
+          &nbsp;
+          <a (click)="back()" #cerrar class="btn btn-info btn-lg btn-block">
+            <i class="fas fa-arrow-left"></i> Volver
+          </a>
+        </div>
+        <!-- </form> -->
+      </div>
     </div>
-    <!-- </form> -->
   </div>
-</div>
+</ng-template>
+<ng-template #noMostrar>
+  <div id="form" class="container">
+    <form class="form" #f="ngForm" ngNativeValidate *ngIf="item">
+      <!-- .row>.col-md-4*3-->
+      <!-- membrete -->
+      <div id="membrete" class="row text-center">
+        <div class="col-md-4">
+          <img height="80px" width="auto" src="assets/img/logopol.png" alt="" />
+          <br />
+          <label for="">
+            <b>PROVINCIA DEL CHACO</b>
+            <br />
+            <b>POLICIA</b>
+          </label>
+        </div>
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+          <img height="80px" width="auto" src="assets/img/logocom.png" alt="" />
+          <br />
+          <label for="">
+            <b>DCCION. EJECUTIVA DEL C.E.A.C</b>
+            <br />
+            <b>DPTO. COM. E INFORMATICA</b>
+          </label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <b
+            >*********************************************************************************************************************************************************</b
+          >
+        </div>
+      </div>
+      <div id="padding" class="row">
+        <div class="col-md-12 text-center">
+          <h4>
+            <u
+              ><b>
+                <u><em>ORDEN DE SERVICIO EXTERNA</em> </u>
+              </b></u
+            >
+          </h4>
+        </div>
+      </div>
+      <br />
+      <div class="row">
+        <div class="col-md-2">
+          <em>UNIDAD:</em>
+        </div>
+        <div id="bordes" class="col-md-4 text-center">
+          <b> {{ items[0].unidad.nombre | uppercase }}</b>
+        </div>
+        <div class="col-md-2">
+          <em>FECHA Y HORA:</em>
+        </div>
+        <div id="bordes" class="col-md-4 text-center">
+          <b>{{ fecha(items[0].fechaReparacion) }}</b>
+        </div>
+      </div>
+      <br />
+      <div class="row">
+        <div class="col-md-1"><em>EQUIPO:</em></div>
+        <div id="bordes" class="col-md-3">
+          <b>{{ items[0].equipo.tipoEquipo.nombre | uppercase }}</b>
+        </div>
+        <div class="col-md-1"><em>MOVIL:</em></div>
+        <div id="bordes" class="col-md-3">
+          <b>{{ items[0].movil?.identificacionPol | uppercase }}</b>
+        </div>
+        <div class="col-md-1"><em>DOMINIO:</em></div>
+        <div id="bordes" class="col-md-3">
+          <b>{{ items[0].movil?.dominio | uppercase }}</b>
+        </div>
+      </div>
+      <br />
+      <div class="row">
+        <div class="col-md-1"><em>MARCA:</em></div>
+        <div id="bordes" class="col-md-3">
+          <b>{{ items[0].equipo.modelo.marca.nombre | uppercase }}</b>
+        </div>
+        <div class="col-md-1"><em>MODELO:</em></div>
+        <div id="bordes" class="col-md-3">
+          <b>{{ items[0].equipo.modelo.nombre | uppercase }}</b>
+        </div>
+        <div class="col-md-1"><em>SERIE N°:</em></div>
+        <div id="bordes" class="col-md-3">
+          <b>{{ items[0].equipo.nroSerie | uppercase }}</b>
+        </div>
+      </div>
+      <br />
+      <div class="row">
+        <label for="">
+          <u><em>ESTADO INICIAL:</em></u>
+        </label>
+        <div id="bordes" class="col-md-12">
+          {{ items[0].estadoInicial | uppercase }}
+        </div>
+      </div>
+      <div class="row">
+        <label for=""
+          ><u><em> ACCIONES REALIZADAS:</em></u></label
+        >
+        <div id="bordes" class="col-md-12">
+          {{ items[0].accionesRealizadas | uppercase }}
+        </div>
+      </div>
+      <div class="row">
+        <label for=""
+          ><u><em>MATERIALES UTILIZADOS:</em></u></label
+        >
+        <div id="bordes" class="col-md-12">
+          {{ items[0].materialesUtilizados | uppercase }}
+        </div>
+      </div>
+      <div class="row">
+        <label for=""
+          ><u><em> OBSERVACIONES:</em></u></label
+        >
+        <div id="bordes" class="col-md-12">
+          {{ items[0].observaciones | uppercase }}
+        </div>
+      </div>
+      <div class="row">
+        <label for=""
+          ><u><em>TECNICO:</em></u></label
+        >
+        <div id="bordes" class="col-md-12">
+          {{ items[0].tecnico.apellido | uppercase }},
+          {{ items[0].tecnico.nombre | uppercase }}
+        </div>
+      </div>
+      <!-- firma de los empleados -->
+      <br />
+      <br />
+      <br />
+      <br />
+      <div class="row">
+        <div class="col-md-4">
+          <div class="row">
+            <div class="col-md-12 b">
+              <b>FIRMA:</b> ____________________________________
+            </div>
+            <div class="col-md-12 b">
+              <b>ACLARACION:</b> {{ items[0].recibi.apellido }},
+              {{ items[0].recibi.nombre }}
+            </div>
+            <div class="col-md-12 b">
+              <b>DNI:</b> {{ items[0].recibi.norDni }}
+            </div>
+            <div class="col-md-12 b">
+              <b>JERARQUIA:</b>_____________________<b>Pza:</b>______
+            </div>
+            <div class="col-md-12 text-center"><b>-RECIBI CONFORME-</b></div>
+          </div>
+        </div>
+        <div class="col md-1"></div>
+        <div class="col-md-2">
+          <img class="sello" src="assets/img/sellounidadcom.png" alt="" />
+        </div>
+        <div class="col md-1"></div>
+        <div class="col-md-4">
+          <div class="row">
+            <div class="col-md-12 b">
+              <b>FIRMA:</b>____________________________________
+            </div>
+            <div class="col-md-12 b">
+              <b>ACLARACION:</b> {{ items[0].entrega.apellido }},
+              {{ items[0].entrega.nombre }}
+            </div>
+            <div class="col-md-12 b">
+              <b>DNI:</b> {{ items[0].entrega.norDni }}
+            </div>
+            <div class="col-md-12 b">
+              <b>JERARQUIA:</b>_____________________<b>Pza:</b>______
+            </div>
+            <div class="col-md-12 text-center"><b>-ENTREGUE CONFORME-</b></div>
+          </div>
+        </div>
+      </div>
+
+      <br />
+      <br />
+
+      <div class="row text-center d-print-none">
+        <div class="col-md-12">
+          <i class="fas fa-cut fa-2x"></i>
+          <b
+            >------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</b
+          >
+        </div>
+      </div>
+
+      <div class="col-md-12">
+        <button (click)="imprimir()" class="d-print-none btn btn-primary">
+          imprimir
+        </button>
+      </div>
+      <br />
+    </form>
+  </div>
+</ng-template>

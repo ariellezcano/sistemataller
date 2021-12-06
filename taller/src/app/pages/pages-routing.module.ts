@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { PrincipalComponent } from './componentes/principal/principal.component';
 import { TableroAreaComponent } from './componentes/tablero-area/tablero-area.component';
 import { AbmIngresoEquipoComponent } from './frm-abm/abm-ingreso-equipo/abm-ingreso-equipo.component';
+import { AbmReporteMovilComponent } from './frm-abm/abm-reporte-movil/abm-reporte-movil.component';
 import { LstComunicacionesComponent } from './lst/lst-comunicaciones/lst-comunicaciones.component';
 import { LstEquiposComponent } from './lst/lst-equipos/lst-equipos.component';
 import { LstImpresorasComponent } from './lst/lst-impresoras/lst-impresoras.component';
@@ -53,6 +54,15 @@ const routes: Routes = [
           {
             path: '',
             component: LstImpresorasComponent,
+          },
+        ],
+      },
+      {
+        path: 'reporte',
+        children: [
+          {
+            path: 'abm',
+            component: AbmReporteMovilComponent,
           },
         ],
       },

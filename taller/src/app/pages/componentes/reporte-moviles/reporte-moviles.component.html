@@ -43,28 +43,56 @@
     </div>
     <br />
     <div class="row">
-      <div id="fecha" class="col-md-12 text-justify">
-        <h5>
-          En la División Desarrollo de Sistemas, dependiente del Departamento
-          Comunicaciones e Informática, sito en Av. 25 de Mayo 1420 de la ciudad
-          de Resistencia, Provincia del Chaco, Departamento San Fernando, a los
-          {{ fecha(item.fechaEntrega) }}, compadece a despacho el Señor/a
-          <b>{{ item.recibe.nombre }} {{ item.recibe.apellido }}</b
-          >, a quién seguidamente se procede a hacer entrega en carácter de
-          <b>{{ instrumento(item.tipoEntrega) }}</b
-          >, destinado al funcionamiento técnico de la unidad
-          <b>{{ item.unidad.nombre | uppercase }}</b> del equipo que se detalla
-          a continuación <b>{{ item.equipo.tipoEquipo.nombre }}</b
-          >, marca <b>{{ item.equipo.modelo.marca.nombre }}</b
-          >, modelo <b>{{ item.equipo.modelo.nombre }}</b
-          >, serie n° <b>{{ item.equipo.nroSerie }}</b
-          >, con su correspondiente
-          <b>{{ item.observaciones | uppercase }}{{ v | uppercase }}</b
-          >, el cual a partir de la fecha queda bajo la entera responsabilidad
-          de la unidad mencionada. Es todo, no siendo para más se da por
-          finalizado el presente acto, previa integra lectura efectuadas por las
-          partes, quienes para constancia legal firman al pie. <b>CONSTE.</b>
-        </h5>
+      <div class="col-md-2">UNIDAD:</div>
+      <div class="col-md-4">{{ item.unidad.nombre | uppercase }}</div>
+      <div class="col-md-2">FECHA Y HORA:</div>
+      <div class="col-md-4">
+        {{ fecha(item.fechaReparacion) }}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-2">EQUIPO:</div>
+      <div class="col-md-4">
+        {{ item.equipo.tipoEquipo.nombre | uppercase }}
+      </div>
+      <div class="col-md-2">MOVIL:</div>
+      <div class="col-md-4">
+        {{ item?.movil?.identificacionPol | uppercase }}
+      </div>
+      <div class="col-md-2">DOMINIO:</div>
+      <div class="col-md-4">{{ item?.movil?.dominio | uppercase }}</div>
+    </div>
+    <div class="row">
+      <div class="col-md-2">MARCA:</div>
+      <div class="col-md-4">
+        {{ item.equipo.modelo.marca.nombre | uppercase }}
+      </div>
+      <div class="col-md-2">MODELO:</div>
+      <div class="col-md-4">{{ item.equipo.modelo.nombre | uppercase }}</div>
+      <div class="col-md-2">SERIE N°:</div>
+      <div class="col-md-4">{{ item.equipo.nroSerie | uppercase }}</div>
+    </div>
+    <div class="row">
+      <label for="">ESTADO INICIAL:</label>
+      <div class="col-md-12">{{ item.estadoInicial | uppercase }}</div>
+    </div>
+    <div class="row">
+      <label for="">ACCIONES REALIZADAS:</label>
+      <div class="col-md-12">{{ item.accionesRealizadas | uppercase }}</div>
+    </div>
+    <div class="row">
+      <label for="">MATERIALES UTILIZADOS:</label>
+      <div class="col-md-12">{{ item.materialesUtilizados | uppercase }}</div>
+    </div>
+    <div class="row">
+      <label for="">OBSERVACIONES:</label>
+      <div class="col-md-12">{{ item.observaciones | uppercase }}</div>
+    </div>
+    <div class="row">
+      <label for="">TECNICO:</label>
+      <div class="col-md-12">
+        {{ item.tecnico.apellido | uppercase }},
+        {{ item.tecnico.nombre | uppercase }}
       </div>
     </div>
     <!-- firma de los empleados -->
@@ -79,10 +107,10 @@
             <b>FIRMA:</b> ____________________________________
           </div>
           <div class="col-md-12 b">
-            <b>ACLARACION:</b> {{ item.recibe.apellido }},
-            {{ item.recibe.nombre }}
+            <b>ACLARACION:</b> {{ item.recibi.apellido }},
+            {{ item.recibi.nombre }}
           </div>
-          <div class="col-md-12 b"><b>DNI:</b> {{ item.recibe.norDni }}</div>
+          <div class="col-md-12 b"><b>DNI:</b> {{ item.recibi.norDni }}</div>
           <div class="col-md-12 b">
             <b>JERARQUIA:</b>_____________________<b>Pza:</b>______
           </div>

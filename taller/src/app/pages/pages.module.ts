@@ -23,6 +23,7 @@ import { FilEntregaUnidadComponent } from './filtros/fil-entrega-unidad/fil-entr
 import { ReporteMovilesComponent } from './componentes/reporte-moviles/reporte-moviles.component';
 import { ReporteExternoComponent } from './componentes/reporte-externo/reporte-externo.component';
 import { AbmReporteMovilComponent } from './frm-abm/abm-reporte-movil/abm-reporte-movil.component';
+import { FilMovilComponent } from './filtros/fil-movil/fil-movil.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { AbmReporteMovilComponent } from './frm-abm/abm-reporte-movil/abm-report
     FiltrounidadComponent,
     FilEntregaUnidadComponent,
     FilEquipoReparacionComponent,
+    FilMovilComponent,
 
     LstComunicacionesComponent,
     LstInformaticaComponent,
