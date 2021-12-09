@@ -15,10 +15,10 @@
         <div class="row">
           <!-- Fecha Ingreso del equipo -->
           <div class="form-group col-md-6">
-            <label for="title">Fecha Ingreso para reparación</label>
+            <label for="title">Fecha de reparación</label>
             <input
               class="form-control"
-              type="datetime-local"
+              type="date"
               oninvalid="setCustomValidity('El campo es obligatorio')"
               oninput="setCustomValidity('')"
               id="fechaReparacion"
@@ -45,41 +45,29 @@
               (resultado)="unidadesEncontradas($event)"
             ></app-filtrounidad>
           </div>
-          <div class="form-group col-md-6" required>
-            <app-filtro-equipo
-              [dibujar]="item.equipo"
-              (resultado)="equiposEncontrados($event)"
-            ></app-filtro-equipo>
-          </div>
         </div>
         <div class="row">
           <!-- movil   -->
-          <div class="form-group col-md-6">
-            <app-fil-movil
-              [dibujar]="item.movil"
-              (resultado)="vehiculoE($event)"
-            ></app-fil-movil>
-          </div>
           <div class="form-group col-md-6" required>
-            <label for="">Personal a cargo del móvil</label>
+            <label for="">Personal a cargo de Unidad</label>
             <app-fil-persona
-              [dibujar]="item.recibi"
-              (resultado)="recibiEncontrada($event)"
+              [dibujar]="item.responsableUnidad"
+              (resultado)="responsableUnidad($event)"
             ></app-fil-persona>
           </div>
         </div>
         <div class="row">
           <div class="form-group col-md-12">
-            <label for="title">Estado inicial</label>
+            <label for="title">Problema informado</label>
             <input
               class="form-control"
               type="text"
               oninvalid="setCustomValidity('El campo es obligatorio')"
               oninput="setCustomValidity('')"
-              id="notaNro"
-              name="notaNro"
-              placeholder="Ingrese estado del vehículo en el que ingreso"
-              [(ngModel)]="item.estadoInicial"
+              id="problema"
+              name="problema"
+              placeholder="Ingrese falla informada"
+              [(ngModel)]="item.problema"
               required
             />
           </div>
@@ -89,11 +77,11 @@
             <div class="form-floating">
               <label for="floatingTextarea">Acciones realizadas</label>
               <textarea
-                [(ngModel)]="item.accionesRealizadas"
+                [(ngModel)]="item.accionesTomadas"
                 class="form-control"
-                name="accionesRealizadas"
+                name="accionesTomadas"
                 placeholder="Acciones realizadas"
-                id="accionesRealizadas"
+                id="accionesTomadas"
               ></textarea>
             </div>
           </div>
@@ -167,7 +155,7 @@
           </div>
         </ng-template>
 
-        <div class="row" *ngIf="items.length > 0; mostrar">
+        <!-- <div class="row" *ngIf="items.length > 0; mostrar">
           <table #mostrar id="tabla" class="table">
             <thead class="text-center table-primary">
               <tr>
@@ -206,7 +194,7 @@
               </tr>
             </tbody>
           </table>
-        </div>
+        </div> -->
 
         <hr />
         <div class="form-group">
@@ -272,98 +260,230 @@
           <h4>
             <u
               ><b>
-                <u><em>ORDEN DE SERVICIO EXTERNA</em> </u>
+                <u><em>ORDEN DE SERVICIO EXTERNO</em></u>
               </b></u
             >
           </h4>
         </div>
       </div>
       <br />
-      <div class="row">
-        <div class="col-md-2">
-          <em>UNIDAD:</em>
-        </div>
-        <div id="bordes" class="col-md-4 text-center">
-          <b> {{ items[0].unidad.nombre | uppercase }}</b>
-        </div>
-        <div class="col-md-2">
-          <em>FECHA Y HORA:</em>
-        </div>
-        <div id="bordes" class="col-md-4 text-center">
-          <b>{{ fecha(items[0].fechaReparacion) }}</b>
+      <div id="bordesfecha" class="row" class="fecha">
+        <div class="col-md-12 text-right">
+          <span
+            ><u
+              ><em><b>Fecha:</b></em></u
+            ></span
+          >
+          &nbsp; {{ fecha(item.fechaReparacion) }}
         </div>
       </div>
       <br />
-      <div class="row">
-        <div class="col-md-1"><em>EQUIPO:</em></div>
-        <div id="bordes" class="col-md-3 text-center">
-          <b>{{ items[0].equipo.tipoEquipo.nombre | uppercase }}</b>
-        </div>
-        <div class="col-md-1"><em>MOVIL:</em></div>
-        <div id="bordes" class="col-md-3 text-center">
-          <b>{{ items[0].movil?.identificacionPol | uppercase }}</b>
-        </div>
-        <div class="col-md-1"><em>DOMINIO:</em></div>
-        <div id="bordes" class="col-md-3 text-center">
-          <b>{{ items[0].movil?.dominio | uppercase }}</b>
-        </div>
+      <div id="bordes" class="row">
+        <ng-container
+          *ngIf="!items[0].unidad; then mostrarU; else nomostrarU"
+        ></ng-container>
+        <ng-template #mostrarU>
+          <div class="form-group col-md-12">
+            <label for="title"
+              ><span
+                ><u
+                  ><em><b>Unidad:</b></em></u
+                ></span
+              ></label
+            >
+            <input
+              style="border: none; background-color: transparent"
+              class="form-control"
+              type="text"
+              oninvalid="setCustomValidity('El campo es obligatorio')"
+              oninput="setCustomValidity('')"
+              id="fechaReparacion"
+              name="fechaReparacion"
+            />
+          </div>
+        </ng-template>
+        <ng-template #nomostrarU>
+          <div class="col-md-12">
+            <span
+              ><u
+                ><em><b>Unidad:</b></em></u
+              ></span
+            >
+            {{ items[0].unidad.nombre }}
+          </div>
+        </ng-template>
+      </div>
+
+      <br />
+      <div id="bordes" class="row">
+        <ng-container
+          *ngIf="!items[0].problema; then mostrar; else noMostrar"
+        ></ng-container>
+        <ng-template #mostrar>
+          <div class="form-group col-md-12">
+            <div class="form-floating">
+              <label for="floatingTextarea"
+                ><b
+                  ><u><em> Problema</em></u></b
+                ></label
+              >
+              <textarea
+                rows="3"
+                cols="1"
+                style="border: none; background-color: transparent"
+                class="form-control"
+                name="problema"
+                id="problema"
+              ></textarea>
+            </div>
+          </div>
+        </ng-template>
+        <ng-template #noMostrar>
+          <div class="col-md-12">
+            <span
+              ><u
+                ><em><b>Problema:</b> </em></u
+              ></span
+            >
+            {{ items[0].problema }}
+          </div>
+        </ng-template>
       </div>
       <br />
-      <div class="row">
-        <div class="col-md-1"><em>MARCA:</em></div>
-        <div id="bordes" class="col-md-3 text-center">
-          <b>{{ items[0].equipo.modelo.marca.nombre | uppercase }}</b>
-        </div>
-        <div class="col-md-1"><em>MODELO:</em></div>
-        <div id="bordes" class="col-md-3 text-center">
-          <b>{{ items[0].equipo.modelo.nombre | uppercase }}</b>
-        </div>
-        <div class="col-md-1"><em>SERIE N°:</em></div>
-        <div id="bordes" class="col-md-3 text-center">
-          <b>{{ items[0].equipo.nroSerie | uppercase }}</b>
-        </div>
+      <div id="bordes" class="row">
+        <ng-container
+          *ngIf="!items[0].accionesTomadas; then mostrarA; else noMostrarA"
+        ></ng-container>
+        <ng-template #mostrarA>
+          <div class="form-group col-md-12">
+            <div class="form-floating">
+              <label for="floatingTextarea"
+                ><b
+                  ><u><em> Acciones tomadas:</em></u></b
+                ></label
+              >
+              <textarea
+                style="border: none; background-color: transparent"
+                class="form-control"
+                name="accionesTomadas"
+                id="accionesTomadas"
+              ></textarea>
+            </div>
+          </div>
+        </ng-template>
+        <ng-template #noMostrarA>
+          <div class="col-md-12">
+            <span
+              ><u
+                ><em><b>Acciones tomadas:</b> </em></u
+              >
+            </span>
+            {{ items[0].accionesTomadas }}
+          </div>
+        </ng-template>
       </div>
       <br />
-      <div class="row">
-        <label for="">
-          <u><em>ESTADO INICIAL:</em></u>
-        </label>
-        <div id="bordes" class="col-md-12">
-          {{ items[0].estadoInicial | uppercase }}
-        </div>
+      <div id="bordes" class="row">
+        <ng-container
+          *ngIf="!items[0].materialesUtilizados; then mostrarM; else noMostrarM"
+        ></ng-container>
+        <ng-template #mostrarM>
+          <div class="form-group col-md-12">
+            <div class="form-floating">
+              <label for="floatingTextarea"
+                ><b
+                  ><u><em>Materiales utilizados:</em></u></b
+                ></label
+              >
+              <textarea
+                style="border: none; background-color: transparent"
+                class="form-control"
+                name="materialesUtilizados"
+                id="materialesUtilizados"
+              ></textarea>
+            </div>
+          </div>
+        </ng-template>
+        <ng-template #noMostrarM>
+          <div class="col-md-12">
+            <span
+              ><u
+                ><em><b>Materiales utilizados:</b> </em></u
+              >
+            </span>
+            {{ items[0].materialesUtilizados }}
+          </div>
+        </ng-template>
       </div>
-      <div class="row">
-        <label for=""
-          ><u><em> ACCIONES REALIZADAS:</em></u></label
-        >
-        <div id="bordes" class="col-md-12">
-          {{ items[0].accionesRealizadas | uppercase }}
-        </div>
+      <br />
+      <div id="bordes" class="row">
+        <ng-container
+          *ngIf="!items[0].observaciones; then mostrarO; else noMostrarO"
+        ></ng-container>
+        <ng-template #mostrarO>
+          <div class="form-group col-md-12">
+            <div class="form-floating">
+              <label for="floatingTextarea"
+                ><b
+                  ><u><em>Observaciones:</em></u></b
+                ></label
+              >
+              <textarea
+                style="border: none; background-color: transparent"
+                class="form-control"
+                name="observaciones"
+                id="observaciones"
+              >
+              </textarea>
+            </div>
+          </div>
+        </ng-template>
+        <ng-template #noMostrarO>
+          <div class="col-md-12">
+            <span
+              ><u
+                ><em><b>Observaciones:</b></em></u
+              >
+            </span>
+            {{ items[0].observaciones }}
+          </div>
+        </ng-template>
       </div>
-      <div class="row">
-        <label for=""
-          ><u><em>MATERIALES UTILIZADOS:</em></u></label
-        >
-        <div id="bordes" class="col-md-12">
-          {{ items[0].materialesUtilizados | uppercase }}
-        </div>
-      </div>
-      <div class="row">
-        <label for=""
-          ><u><em> OBSERVACIONES:</em></u></label
-        >
-        <div id="bordes" class="col-md-12">
-          {{ items[0].observaciones | uppercase }}
-        </div>
-      </div>
-      <div class="row">
-        <label for=""
-          ><u><em>TECNICO A CARGO DE REPARACION:</em></u></label
-        >
-        <div id="bordes" class="col-md-12">
-          {{ items[0].tecnico.apellido | uppercase }},
-          {{ items[0].tecnico.nombre | uppercase }}
-        </div>
+      <br />
+      <div id="bordes" class="row">
+        <ng-container
+          *ngIf="!items[0].tecnico; then mostrarT; else noMostrarT"
+        ></ng-container>
+        <ng-template #mostrarT>
+          <div class="form-group col-md-12">
+            <label for="title"
+              ><span
+                ><u
+                  ><em><b>Técnico:</b></em></u
+                ></span
+              ></label
+            >
+            <input
+              style="border: none; background-color: transparent"
+              class="form-control"
+              type="text"
+              oninvalid="setCustomValidity('El campo es obligatorio')"
+              oninput="setCustomValidity('')"
+              id="tecnico"
+              name="tecnico"
+            />
+          </div>
+        </ng-template>
+        <ng-template #noMostrarT>
+          <div class="col-md-12">
+            <span
+              ><u
+                ><em><b>Técnico a cargo del servicio:</b> </em></u
+              >
+            </span>
+            {{ items[0].tecnico.apellido }}, {{ items[0].tecnico.nombre }}
+          </div>
+        </ng-template>
       </div>
       <!-- firma de los empleados -->
       <br />
@@ -373,18 +493,16 @@
       <div class="row">
         <div class="col-md-4">
           <div class="row">
+            <div class="col-md-12 b"><b>FIRMA:</b> ____________________</div>
             <div class="col-md-12 b">
-              <b>FIRMA:</b> ____________________________________
+              <b>ACLARACION:</b> {{ items[0].responsableUnidad.apellido }},
+              {{ items[0].responsableUnidad.nombre }}
             </div>
             <div class="col-md-12 b">
-              <b>ACLARACION:</b> {{ items[0].recibi.apellido }},
-              {{ items[0].recibi.nombre }}
+              <b>DNI:</b> {{ items[0].responsableUnidad.norDni }}
             </div>
             <div class="col-md-12 b">
-              <b>DNI:</b> {{ items[0].recibi.norDni }}
-            </div>
-            <div class="col-md-12 b">
-              <b>JERARQUIA:</b>_____________________<b>Pza:</b>______
+              <b>JERARQUIA:</b>_____________________
             </div>
             <div class="col-md-12 text-center"><b>-RECIBI CONFORME-</b></div>
           </div>
@@ -396,18 +514,16 @@
         <div class="col md-1"></div>
         <div class="col-md-4">
           <div class="row">
+            <div class="col-md-12 b"><b>FIRMA:</b> ____________________</div>
             <div class="col-md-12 b">
-              <b>FIRMA:</b>____________________________________
+              <b>ACLARACION:</b> {{ items[0].responsableServicio.apellido }},
+              {{ items[0].responsableServicio.nombre }}
             </div>
             <div class="col-md-12 b">
-              <b>ACLARACION:</b> {{ items[0].entrega.apellido }},
-              {{ items[0].entrega.nombre }}
+              <b>DNI:</b> {{ items[0].responsableServicio.norDni }}
             </div>
             <div class="col-md-12 b">
-              <b>DNI:</b> {{ items[0].entrega.norDni }}
-            </div>
-            <div class="col-md-12 b">
-              <b>JERARQUIA:</b>_____________________<b>Pza:</b>______
+              <b>JERARQUIA:</b>_____________________
             </div>
             <div class="col-md-12 text-center"><b>-ENTREGUE CONFORME-</b></div>
           </div>

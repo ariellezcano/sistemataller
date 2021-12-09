@@ -24,6 +24,7 @@ import { ReporteMovilesComponent } from './componentes/reporte-moviles/reporte-m
 import { ReporteExternoComponent } from './componentes/reporte-externo/reporte-externo.component';
 import { AbmReporteMovilComponent } from './frm-abm/abm-reporte-movil/abm-reporte-movil.component';
 import { FilMovilComponent } from './filtros/fil-movil/fil-movil.component';
+import { AbmReporteExternoComponent } from './frm-abm/abm-reporte-externo/abm-reporte-externo.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { FilMovilComponent } from './filtros/fil-movil/fil-movil.component';
     ReporteMovilesComponent,
     ReporteExternoComponent,
     AbmReporteMovilComponent,
+    AbmReporteExternoComponent,
 
     //declarar paginas de pages
   ],

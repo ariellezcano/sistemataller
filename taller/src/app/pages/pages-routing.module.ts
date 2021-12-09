@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { PrincipalComponent } from './componentes/principal/principal.component';
 import { TableroAreaComponent } from './componentes/tablero-area/tablero-area.component';
 import { AbmIngresoEquipoComponent } from './frm-abm/abm-ingreso-equipo/abm-ingreso-equipo.component';
+import { AbmReporteExternoComponent } from './frm-abm/abm-reporte-externo/abm-reporte-externo.component';
 import { AbmReporteMovilComponent } from './frm-abm/abm-reporte-movil/abm-reporte-movil.component';
 import { LstComunicacionesComponent } from './lst/lst-comunicaciones/lst-comunicaciones.component';
 import { LstEquiposComponent } from './lst/lst-equipos/lst-equipos.component';
@@ -63,6 +64,15 @@ const routes: Routes = [
           {
             path: 'abm',
             component: AbmReporteMovilComponent,
+          },
+        ],
+      },
+      {
+        path: 'servicio-externo',
+        children: [
+          {
+            path: 'abm',
+            component: AbmReporteExternoComponent,
           },
         ],
       },

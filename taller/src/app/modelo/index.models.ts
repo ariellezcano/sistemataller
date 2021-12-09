@@ -22,3 +22,5 @@ export { Diagnosticos } from './componentes/diagnostico';
 export { DiagnosticosEquipo } from './componentes/diagnosticosEquipo';
 export { OrdenTrabajo } from './componentes/ordenTrabajo';
 export { ReparacionEquipo } from './componentes/reparacionEquipo';
+export { ServicioExterno } from './componentes/servicioExterno';
+export { ReporteMovil } from './componentes/reporte-movil';

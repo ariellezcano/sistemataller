@@ -21,13 +21,13 @@
     color: #000 !important;
   }
 }
-hr {
-  border-top: 2px solid black;
-  border-bottom: 2px solid black;
-  border-left: none;
-  border-right: none;
-  height: 2px;
-}
+// hr {
+//   border-top: 2px solid black;
+//   border-bottom: 2px solid black;
+//   border-left: none;
+//   border-right: none;
+//   height: 2px;
+// }
 #padding {
   padding-top: 0%;
 }
@@ -88,8 +88,8 @@ hr {
 }
 
 /*
-    The arrow size and position depends from sizes of square because I needed an arrow correct positioning from the top left corner of the element toggle
-    */
+      The arrow size and position depends from sizes of square because I needed an arrow correct positioning from the top left corner of the element toggle
+      */
 
 .toggle__text:before {
   content: "";
@@ -123,14 +123,14 @@ hr {
 }
 
 /*
-    =====
-    LEVEL 2. PRESENTATION STYLES
-    =====
-    */
+      =====
+      LEVEL 2. PRESENTATION STYLES
+      =====
+      */
 
 /* 
-    The demo skin
-    */
+      The demo skin
+      */
 
 .toggle__label:before,
 .toggle__label:after {
@@ -138,8 +138,8 @@ hr {
 }
 
 /* 
-    The animation of switching states
-    */
+      The animation of switching states
+      */
 
 .toggle__input:not(:disabled) ~ .toggle__label:before,
 .toggle__input:not(:disabled) ~ .toggle__label:after {
@@ -179,10 +179,10 @@ hr {
 }
 
 /*
-    =====
-    LEVEL 3. SETTINGS
-    =====
-    */
+      =====
+      LEVEL 3. SETTINGS
+      =====
+      */
 
 .toggle {
   --toggleColor: #148d75;
@@ -226,7 +226,22 @@ b {
 #membrete {
   padding-top: 0%;
 }
-#rowFecha {
-  border: black 5px solid;
-  background-color: #868e96;
+#bordes {
+  border: black 1px solid;
+}
+#bordesfecha {
+  border: black 1px solid !important;
+  background-color: #c8ccd1 !important;
+}
+.fecha {
+  border: #000 1px !important;
+}
+#hr {
+  border-bottom: 1px solid black !important;
+  padding: 0%;
+}
+textarea {
+  rows {
+    border-bottom: #000;
+  }
 }

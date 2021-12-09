@@ -10,15 +10,15 @@ const routes: Routes = [
     path: '',
     component: LoginComponent,
   },
-  {
-    path: 'reporte-movil',
-    children: [
-      {
-        path: '',
-        component: ReporteMovilesComponent,
-      },
-    ],
-  },
+  // {
+  //   path: 'reporte-movil',
+  //   children: [
+  //     {
+  //       path: '',
+  //       component: ReporteMovilesComponent,
+  //     },
+  //   ],
+  // },
   {
     path: 'reporte-externo',
     children: [
