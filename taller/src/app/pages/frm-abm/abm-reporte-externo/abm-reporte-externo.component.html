@@ -280,7 +280,7 @@
       <br />
       <div id="bordes" class="row">
         <ng-container
-          *ngIf="!items[0].unidad; then mostrarU; else nomostrarU"
+          *ngIf="!items[0].unidad.nombre; then mostrarU; else nomostrarU"
         ></ng-container>
         <ng-template #mostrarU>
           <div class="form-group col-md-12">
@@ -324,17 +324,20 @@
             <div class="form-floating">
               <label for="floatingTextarea"
                 ><b
-                  ><u><em> Problema</em></u></b
+                  ><u><em> Problema:</em></u></b
                 ></label
               >
-              <textarea
-                rows="3"
-                cols="1"
+              <div class="col-md-12">
+                <br />
+                <hr />
+                <br />
+              </div>
+              <!-- <textarea
                 style="border: none; background-color: transparent"
                 class="form-control"
                 name="problema"
                 id="problema"
-              ></textarea>
+              ></textarea> -->
             </div>
           </div>
         </ng-template>
@@ -362,12 +365,20 @@
                   ><u><em> Acciones tomadas:</em></u></b
                 ></label
               >
-              <textarea
+              <div class="col-md-12">
+                <br />
+                <hr />
+                <br />
+                <hr />
+                <br />
+              </div>
+
+              <!-- <textarea
                 style="border: none; background-color: transparent"
                 class="form-control"
                 name="accionesTomadas"
                 id="accionesTomadas"
-              ></textarea>
+              ></textarea> -->
             </div>
           </div>
         </ng-template>
@@ -395,12 +406,19 @@
                   ><u><em>Materiales utilizados:</em></u></b
                 ></label
               >
-              <textarea
+              <div class="col-md-12">
+                <br />
+                <hr />
+                <br />
+                <hr />
+                <br />
+              </div>
+              <!-- <textarea
                 style="border: none; background-color: transparent"
                 class="form-control"
                 name="materialesUtilizados"
                 id="materialesUtilizados"
-              ></textarea>
+              ></textarea> -->
             </div>
           </div>
         </ng-template>
@@ -428,13 +446,20 @@
                   ><u><em>Observaciones:</em></u></b
                 ></label
               >
-              <textarea
+              <div class="col-md-12">
+                <br />
+                <hr />
+                <br />
+                <hr />
+                <br />
+              </div>
+              <!-- <textarea
                 style="border: none; background-color: transparent"
                 class="form-control"
                 name="observaciones"
                 id="observaciones"
               >
-              </textarea>
+              </textarea> -->
             </div>
           </div>
         </ng-template>
@@ -452,7 +477,11 @@
       <br />
       <div id="bordes" class="row">
         <ng-container
-          *ngIf="!items[0].tecnico; then mostrarT; else noMostrarT"
+          *ngIf="
+            !items[0].tecnico.apellido && !items[0].tecnico.nombre;
+            then mostrarT;
+            else noMostrarT
+          "
         ></ng-container>
         <ng-template #mostrarT>
           <div class="form-group col-md-12">
@@ -493,16 +522,36 @@
       <div class="row">
         <div class="col-md-4">
           <div class="row">
-            <div class="col-md-12 b"><b>FIRMA:</b> ____________________</div>
             <div class="col-md-12 b">
-              <b>ACLARACION:</b> {{ items[0].responsableUnidad.apellido }},
-              {{ items[0].responsableUnidad.nombre }}
+              <b>FIRMA:</b> _________________________
             </div>
+            <ng-container
+              *ngIf="
+                !items[0].responsableUnidad.apellido &&
+                  !items[0].responsableUnidad.nombre;
+                then mostrarReU;
+                else nomostrarReU
+              "
+            ></ng-container>
+            <ng-template #mostrarReU>
+              <div class="col-md-12 b">
+                <b>ACLARACION:</b> ___________________
+              </div>
+              <div class="col-md-12 b">
+                <b>DNI N°:</b> _________________________
+              </div>
+            </ng-template>
+            <ng-template #nomostrarReU>
+              <div class="col-md-12 b">
+                <b>ACLARACION:</b> {{ items[0].responsableUnidad.apellido }},
+                {{ items[0].responsableUnidad.nombre }}
+              </div>
+              <div class="col-md-12 b">
+                <b>DNI N°:</b> {{ items[0].responsableUnidad.norDni }}
+              </div>
+            </ng-template>
             <div class="col-md-12 b">
-              <b>DNI:</b> {{ items[0].responsableUnidad.norDni }}
-            </div>
-            <div class="col-md-12 b">
-              <b>JERARQUIA:</b>_____________________
+              <b>JERARQUIA - Pza:</b>_________________
             </div>
             <div class="col-md-12 text-center"><b>-RECIBI CONFORME-</b></div>
           </div>
@@ -514,16 +563,36 @@
         <div class="col md-1"></div>
         <div class="col-md-4">
           <div class="row">
-            <div class="col-md-12 b"><b>FIRMA:</b> ____________________</div>
             <div class="col-md-12 b">
-              <b>ACLARACION:</b> {{ items[0].responsableServicio.apellido }},
-              {{ items[0].responsableServicio.nombre }}
+              <b>FIRMA:</b> _________________________
             </div>
+            <ng-container
+              *ngIf="
+                !items[0].responsableServicio.apellido &&
+                  !items[0].responsableServicio.nombre;
+                then mostrarReS;
+                else nomostrarReS
+              "
+            ></ng-container>
+            <ng-template #nomostrarReS>
+              <div class="col-md-12 b">
+                <b>ACLARACION:</b> {{ items[0].responsableServicio.apellido }},
+                {{ items[0].responsableServicio.nombre }}
+              </div>
+              <div class="col-md-12 b">
+                <b>DNI:</b> {{ items[0].responsableServicio.norDni }}
+              </div>
+            </ng-template>
+            <ng-template #mostrarReS>
+              <div class="col-md-12 b">
+                <b>ACLARACION:</b> ___________________
+              </div>
+              <div class="col-md-12 b">
+                <b>DNI N°:</b> _________________________
+              </div>
+            </ng-template>
             <div class="col-md-12 b">
-              <b>DNI:</b> {{ items[0].responsableServicio.norDni }}
-            </div>
-            <div class="col-md-12 b">
-              <b>JERARQUIA:</b>_____________________
+              <b>JERARQUIA - Pza:</b>_________________
             </div>
             <div class="col-md-12 text-center"><b>-ENTREGUE CONFORME-</b></div>
           </div>

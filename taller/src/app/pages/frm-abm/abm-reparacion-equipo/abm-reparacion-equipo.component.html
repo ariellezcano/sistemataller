@@ -1,0 +1,132 @@
+<div class="row">
+  <div class="col-md-12">
+    <h2><b>DETALLAR REPARACION</b></h2>
+    <!-- <form
+        #f="ngForm"
+        (ngSubmit)="doAction(f)"
+        ngNativeValidate
+        class="was-validated"
+      > -->
+    <hr />
+    <div class="row">
+      <!-- Fecha Ingreso del equipo -->
+      <div class="form-group col-md-3">
+        <label for="title">Fecha de reparación</label>
+        <input
+          class="form-control"
+          type="date"
+          oninvalid="setCustomValidity('El campo es obligatorio')"
+          oninput="setCustomValidity('')"
+          id="fechaReparacion"
+          name="fechaReparacion"
+          placeholder=""
+          [(ngModel)]="item.fechaReparacion"
+          required
+        />
+      </div>
+      <!-- persona que trae -->
+      <div class="form-group col-md-6" required>
+        <label for="">Persona que reparó:</label>
+        <app-fil-persona
+          [dibujar]="item.personaRepara"
+          (resultado)="personasEncontrados($event)"
+        ></app-fil-persona>
+      </div>
+      <hr class="hr" />
+    </div>
+    <div class="row">
+      <!-- Observaciones -->
+      <div class="form-group col-md-12">
+        <div class="form-floating">
+          <label for="floatingTextarea">Observaciones</label>
+          <textarea
+            [(ngModel)]="item.observacion"
+            class="form-control"
+            name="observacion"
+            placeholder="Observaciones del equipo"
+            id="observacion"
+          ></textarea>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-md-12">
+        <button
+          id="boton"
+          type="button"
+          title="Guardar"
+          placement="top"
+          (click)="addRow()"
+          show-delay="10"
+          class="btn btn-warning btn-lg btn-block float-left"
+        >
+          <i class="fas fa-plus"></i>
+        </button>
+      </div>
+    </div>
+    <div class="row" *ngIf="items.length > 0; mostrar">
+      <table #mostrar id="tabla" class="table">
+        <thead class="text-center table-primary">
+          <tr>
+            <th>Orden de trabajo</th>
+            <th>Marca-Modelo</th>
+            <th>Fecha reparación</th>
+            <th>Técnico</th>
+            <th>Area</th>
+            <th>Acción</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of items" class="text-center">
+            <td>{{ item?.equipo?.ordenTrabajo?.nroOrden }}</td>
+            <td>
+              {{ item?.equipo?.equipo?.modelo?.marca?.nombre }} -
+              {{ item?.equipo?.equipo?.modelo?.nombre }}
+            </td>
+            <td>{{ item?.fechaReparacion | date: "dd/MM/yyyy" }}</td>
+            <td>
+              {{ item?.personaRepara?.apellido }},
+              {{ item?.personaRepara?.nombre }}
+            </td>
+            <td>{{ area(item?.equipo?.area) }}</td>
+            <td>
+              <button
+                type="button"
+                title="Eliminar de la lista"
+                placement="top"
+                show-delay="10"
+                (click)="deleteRow(item)"
+                class="btn btn-danger btn-sm btn-redondo"
+              >
+                <i class="fas fa-calendar-times"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <hr />
+    <div class="form-group">
+      <button
+        *ngIf="items.length > 0; mostrar"
+        type="submit"
+        (click)="doAction()"
+        [disabled]="procesando"
+        name="btn"
+        class="btn btn-primary btn-lg btn-block float-left"
+      >
+        Aceptar
+        <ng-container *ngIf="getProceso(); then mostrar"></ng-container>
+        <ng-template #mostrar>
+          <i class="fa fa-spinner fa-spin" aria-hidden="true"></i>
+        </ng-template>
+      </button>
+      &nbsp;
+      <a (click)="back()" #cerrar class="btn btn-info btn-lg btn-block">
+        <i class="fas fa-arrow-left"></i> Volver
+      </a>
+    </div>
+    <!-- </form> -->
+  </div>
+</div>
