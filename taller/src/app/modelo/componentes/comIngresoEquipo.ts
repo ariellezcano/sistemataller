@@ -1,8 +1,6 @@
 import { Equipo } from './equipo';
-import { EstadoEquipo } from './estadoEquipo';
 import { OrdenTrabajo } from './ordenTrabajo';
 import { Persona } from './persona';
-import { Unidad } from './unidad';
 
 export class ComIngresoEquipo {
   id!: number;

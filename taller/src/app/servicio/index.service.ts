@@ -12,3 +12,5 @@ export { EquipoService } from './componentes/equipo.service';
 export { UnidadService } from './componentes/unidad.service';
 export { DatoPolicialService } from './componentes/dato-policial.service';
 export { VehiculosService } from './componentes/vehiculo.service';
+export { DiagnosticoService } from './componentes/diagnostico.service';
+export { DiagnosticoEquipoService } from './componentes/diagnostico-equipo.service';

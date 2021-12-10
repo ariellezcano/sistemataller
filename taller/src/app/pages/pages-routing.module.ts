@@ -2,7 +2,10 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PrincipalComponent } from './componentes/principal/principal.component';
 import { TableroAreaComponent } from './componentes/tablero-area/tablero-area.component';
+import { AbmDiagnosticoEquipoComponent } from './frm-abm/abm-diagnostico-equipo/abm-diagnostico-equipo.component';
+import { AbmDiagnosticoComponent } from './frm-abm/abm-diagnostico/abm-diagnostico.component';
 import { AbmIngresoEquipoComponent } from './frm-abm/abm-ingreso-equipo/abm-ingreso-equipo.component';
+import { AbmReparacionEquipoComponent } from './frm-abm/abm-reparacion-equipo/abm-reparacion-equipo.component';
 import { AbmReporteExternoComponent } from './frm-abm/abm-reporte-externo/abm-reporte-externo.component';
 import { AbmReporteMovilComponent } from './frm-abm/abm-reporte-movil/abm-reporte-movil.component';
 import { LstComunicacionesComponent } from './lst/lst-comunicaciones/lst-comunicaciones.component';
@@ -73,6 +76,33 @@ const routes: Routes = [
           {
             path: 'abm',
             component: AbmReporteExternoComponent,
+          },
+        ],
+      },
+      {
+        path: 'reparacion',
+        children: [
+          {
+            path: 'abm',
+            component: AbmReparacionEquipoComponent,
+          },
+        ],
+      },
+      {
+        path: 'diagnostico',
+        children: [
+          {
+            path: 'abm',
+            component: AbmDiagnosticoComponent,
+          },
+        ],
+      },
+      {
+        path: 'diagnostico-equipo',
+        children: [
+          {
+            path: 'abm',
+            component: AbmDiagnosticoEquipoComponent,
           },
         ],
       },
