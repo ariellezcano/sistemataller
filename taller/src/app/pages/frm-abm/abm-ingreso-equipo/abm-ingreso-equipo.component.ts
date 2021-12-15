@@ -69,7 +69,9 @@ export class AbmIngresoEquipoComponent implements OnInit {
   }
 
   doAction() {
-    this.item.ingresoRecibe = JSON.parse('' + UturuncoUtils.getSession('user'));
+    this.item.ingresoRecibe.id = JSON.parse(
+      '' + UturuncoUtils.getSession('personal')
+    ).id;
     /* validar */
     if (this.item.id == undefined) {
       this.doCreate();
@@ -211,6 +213,18 @@ export class AbmIngresoEquipoComponent implements OnInit {
         break;
     }
     return valor;
+  }
+
+  colores(item: ComIngresoEquipo) {
+    let color = '';
+
+    if (item.id == undefined) {
+      color = 't-success';
+    } else {
+      color = 't-default';
+    }
+
+    return color;
   }
 
   back() {

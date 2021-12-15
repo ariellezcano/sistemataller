@@ -144,4 +144,15 @@ export class AbmDiagnosticoComponent implements OnInit {
   getProceso() {
     return this.procesando;
   }
+  colores(item: Diagnosticos) {
+    let color = '';
+
+    if (item.id == undefined) {
+      color = 't-success';
+    } else {
+      color = 't-default';
+    }
+
+    return color;
+  }
 }

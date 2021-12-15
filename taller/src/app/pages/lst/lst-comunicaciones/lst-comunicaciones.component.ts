@@ -22,6 +22,7 @@ export class LstComunicacionesComponent implements OnInit {
   public load!: boolean;
 
   entidad = 'lst-equipos';
+  diagnostico = 'diagnostico';
   constructor(private wsdl: EquipoIngresoService, private router: Router) {
     this.load = false;
     this.item = new ComIngresoEquipo();
@@ -94,8 +95,23 @@ export class LstComunicacionesComponent implements OnInit {
   linkear(id?: Number) {
     this.router.navigateByUrl(this.entidad + '/abm/' + id);
   }
+  linkeardiagnostico() {
+    this.router.navigateByUrl(this.diagnostico + '/abm');
+  }
 
-  colores(valor: any) {
+  colores(item: ComIngresoEquipo) {
+    let color = '';
+
+    if (item.id == undefined) {
+      color = 't-success';
+    } else {
+      color = 't-default';
+    }
+
+    return color;
+  }
+
+  colores1(valor: any) {
     let color = '';
     switch (valor) {
       case 1:

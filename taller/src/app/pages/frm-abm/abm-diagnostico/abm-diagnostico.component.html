@@ -66,7 +66,10 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let item of items" class="text-center">
+          <tr
+            *ngFor="let item of items"
+            class="text-center {{ colores(item) }}"
+          >
             <td>{{ item.nombre }}</td>
             <td>{{ area(item.area) }}</td>
             <td>

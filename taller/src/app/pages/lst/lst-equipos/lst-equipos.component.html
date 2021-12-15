@@ -94,16 +94,19 @@
     </div>
     <hr />
     <div class="row">
+      <div class="col-md-6" id="derecha">
+        <button (click)="linkear(0)" class="btn btn-primary">
+          <i class="fa fa-plus" aria-hidden="true"></i>
+          Ingresar equipo
+        </button>
+      </div>
+      <div class="col-md-6" id="izquierda">
+        <button class="btn btn-danger">
+          <i class="fa fa-trash" aria-hidden="true"></i>
+          Eliminar equipo
+        </button>
+      </div>
       <!-- data-toggle="modal" data-target="#modelId" -->
-      <button (click)="linkear(0)" class="btn btn-primary">
-        <i class="fa fa-plus" aria-hidden="true"></i>
-        Ingresar equipo
-      </button>
-      &nbsp;
-      <button class="btn btn-danger">
-        <i class="fa fa-trash" aria-hidden="true"></i>
-        Eliminar equipo
-      </button>
     </div>
     <!-- Modal -->
     <div

@@ -28,6 +28,8 @@ import { AbmReporteExternoComponent } from './frm-abm/abm-reporte-externo/abm-re
 import { AbmReparacionEquipoComponent } from './frm-abm/abm-reparacion-equipo/abm-reparacion-equipo.component';
 import { AbmDiagnosticoComponent } from './frm-abm/abm-diagnostico/abm-diagnostico.component';
 import { AbmDiagnosticoEquipoComponent } from './frm-abm/abm-diagnostico-equipo/abm-diagnostico-equipo.component';
+import { ComboDiagnosticoEquipoComponent } from './componentes/combo-diagnostico-equipo/combo-diagnostico-equipo.component';
+import { ReciboComponent } from './componentes/recibo/recibo.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +60,8 @@ import { AbmDiagnosticoEquipoComponent } from './frm-abm/abm-diagnostico-equipo/
     AbmReparacionEquipoComponent,
     AbmDiagnosticoComponent,
     AbmDiagnosticoEquipoComponent,
+    ComboDiagnosticoEquipoComponent,
+    ReciboComponent,
 
     //declarar paginas de pages
   ],

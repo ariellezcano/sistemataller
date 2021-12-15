@@ -1,0 +1,20 @@
+<div class="col-lg-12">
+  <div class="control-group">
+    <div class="form-group controls">
+      <label>Seleccione diagnóstico</label>
+      <select
+        (ngModelChange)="capturar($event)"
+        name="nombre"
+        required
+        [(ngModel)]="item"
+        [compareWith]="compareFnDiag"
+        class="form-control form-sm"
+        required
+      >
+        <option *ngFor="let item of items" [ngValue]="item">
+          {{ item.nombre }} - {{ area(item.area) }}
+        </option>
+      </select>
+    </div>
+  </div>
+</div>

@@ -143,7 +143,10 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let item of dtItems" class="text-center">
+          <tr
+            *ngFor="let item of dtItems"
+            class="text-center {{ colores(item) }}"
+          >
             <td>{{ item.equipo.tipoEquipo.nombre }}</td>
             <td>
               {{ item.equipo.modelo.marca.nombre }} -

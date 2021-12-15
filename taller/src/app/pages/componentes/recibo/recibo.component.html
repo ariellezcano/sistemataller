@@ -1,0 +1,169 @@
+<div id="form" class="container">
+  <!-- va dentro del form -->
+  <!-- #f="ngForm" ngNativeValidate *ngIf="item" -->
+  <form class="form">
+    <!-- .row>.col-md-4*3-->
+    <!-- membrete -->
+    <div id="membrete" class="row text-center">
+      <div class="col-md-4">
+        <img height="80px" width="auto" src="assets/img/logopol.png" alt="" />
+        <br />
+        <label for="">
+          <b>PROVINCIA DEL CHACO</b>
+          <br />
+          <b>POLICIA</b>
+        </label>
+      </div>
+      <div class="col-md-4">
+        <br />
+        <br />
+        <br />
+        <label for="">
+          <b>DIVISION DESARROLLO DE SISTEMAS</b>
+          <br />
+          <b>Sección Soporte Técnico</b>
+        </label>
+      </div>
+      <div class="col-md-4">
+        <img height="80px" width="auto" src="assets/img/logocom.png" alt="" />
+        <br />
+        <label for="">
+          <b>DCCION. EJECUTIVA DEL C.E.A.C</b>
+          <br />
+          <b>DPTO. COM. E INFORMATICA</b>
+        </label>
+      </div>
+    </div>
+    <div id="padding" class="row">
+      <div class="col-md-12 text-center">
+        <hr />
+        <h4>
+          <u
+            ><b>
+              <u><em>RECIBO</em> </u>
+            </b></u
+          >
+        </h4>
+        <hr />
+      </div>
+    </div>
+    <br />
+    <div class="row">
+      <div class="col-md-2">RECIBI DE:</div>
+      <!-- <div class="col-md-4">{{ item.ordenTrabajo.unidad.nombre| uppercase }}</div> -->
+      <div class="col-md-10">
+        <b>DEPARTAMENTO COMUNICACIONES E INFORMATICA</b> el equipamiento que a
+        continuación se detalla:
+      </div>
+    </div>
+    <div class="row">
+      <table class="table text-center">
+        <thead>
+          <tr>
+            <th>EQUIPAMIENTO</th>
+            <th>MARCA</th>
+            <th>MODELO</th>
+            <th>NRO. SERIE</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>IMPRESORA</td>
+            <td>HP</td>
+            <td>LASERJET 1102</td>
+            <td>BRBSCBSFRP104</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <label for="">
+          <b>OBSERVACIONES:</b> INGRESA CON CARTUCHO TÓNER.-</label
+        >
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <label for=""> <b>FALLA INFORMADA:</b> A verificar.-</label>
+      </div>
+    </div>
+    <hr />
+    <br />
+    <div class="row">
+      <div class="col-md-6"></div>
+      <div class="col-md-6">
+        <b>RESISTENCIA, {{ fecha(item?.ordenTrabajo?.ingresoFecha) }}</b>
+      </div>
+    </div>
+    <!-- firma de los empleados -->
+    <br />
+    <br />
+    <br />
+    <br />
+    <div class="row">
+      <div class="col-md-4">
+        <div class="row">
+          <div class="col-md-12 b">
+            <b>FIRMA:</b>______________________________
+          </div>
+          <div class="col-md-12 b">
+            <b>ACLARACION:</b>
+            {{ item?.ordenTrabajo?.ingresoRecibe?.apellido }},
+            {{ item?.ordenTrabajo?.ingresoRecibe?.nombre }}
+          </div>
+          <div class="col-md-12 b">
+            <b>DNI:</b> {{ item?.ordenTrabajo?.ingresoRecibe?.norDni }}
+          </div>
+          <div class="col-md-12 b">
+            <b>JERARQUIA - Pza:</b>_____________________
+          </div>
+          <div class="col-md-12 text-center"><b>-RECIBI CONFORME-</b></div>
+        </div>
+      </div>
+      <div class="col md-1"></div>
+      <div class="col-md-2">
+        <img class="sello" src="assets/img/sellounidadcom.png" alt="" />
+      </div>
+      <div class="col md-1"></div>
+      <div class="col-md-4">
+        <div class="row">
+          <div class="col-md-12 b">
+            <b>FIRMA:</b>______________________________
+          </div>
+          <div class="col-md-12 b">
+            <b>ACLARACION:</b>
+            {{ item?.ordenTrabajo?.ingresoEntrega?.apellido }},
+            {{ item?.ordenTrabajo?.ingresoEntrega?.nombre }}
+          </div>
+          <div class="col-md-12 b">
+            <b>DNI:</b> {{ item?.ordenTrabajo?.ingresoEntrega?.norDni }}
+          </div>
+          <div class="col-md-12 b">
+            <b>JERARQUIA - Pza:</b>_____________________
+          </div>
+          <div class="col-md-12 text-center"><b>-ENTREGUE CONFORME-</b></div>
+        </div>
+      </div>
+    </div>
+
+    <br />
+    <br />
+
+    <div class="row text-center d-print-none">
+      <div class="col-md-12">
+        <i class="fas fa-cut fa-2x"></i>
+        <b
+          >------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</b
+        >
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <button (click)="imprimir()" class="d-print-none btn btn-primary">
+        imprimir
+      </button>
+    </div>
+    <br />
+  </form>
+</div>
