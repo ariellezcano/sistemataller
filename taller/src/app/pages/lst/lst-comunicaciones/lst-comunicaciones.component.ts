@@ -1,6 +1,16 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { Router } from '@angular/router';
-import { ComIngresoEquipo } from 'src/app/modelo/index.models';
+import {
+  ComIngresoEquipo,
+  ReparacionEquipo,
+} from 'src/app/modelo/index.models';
 import { EquipoIngresoService } from 'src/app/servicio/componentes/equipo-ingreso.service';
 import { UturuncoUtils } from 'src/app/utils/uturuncoUtils';
 import Swal from 'sweetalert2';
@@ -11,22 +21,31 @@ import Swal from 'sweetalert2';
   styleUrls: ['./lst-comunicaciones.component.scss'],
 })
 export class LstComunicacionesComponent implements OnInit {
-  @ViewChild('close')
-  cerrar!: ElementRef;
+  @ViewChild('close') cerrar!: ElementRef;
+  @ViewChild('close1') cerrar1!: ElementRef;
+
+  @Output()
+  finalizado: EventEmitter<Boolean> = new EventEmitter<Boolean>();
+
+  @Output()
+  cancelado: EventEmitter<Boolean> = new EventEmitter<Boolean>();
 
   exportar: boolean = false;
   items: ComIngresoEquipo[];
   item: ComIngresoEquipo;
-
+  itemR!: ReparacionEquipo;
   procesando!: Boolean;
   public load!: boolean;
 
   entidad = 'lst-equipos';
+  entity = 'lst-comunicaciones';
+
   diagnostico = 'diagnostico';
   constructor(private wsdl: EquipoIngresoService, private router: Router) {
     this.load = false;
     this.item = new ComIngresoEquipo();
     this.items = [];
+    this.itemR = new ReparacionEquipo();
   }
 
   ngOnInit(): void {}
@@ -71,6 +90,19 @@ export class LstComunicacionesComponent implements OnInit {
       UturuncoUtils.showToas('Excepción: ' + error.message, 'error');
     }
     this.procesando = false;
+  }
+
+  accion(event: Boolean) {
+    this.cerrar.nativeElement.click();
+    if (event) {
+      Swal.fire({
+        position: 'top',
+        icon: 'success',
+        title: 'Se actualizo correctamente el fichero.',
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    }
   }
 
   cancel() {
@@ -136,12 +168,45 @@ export class LstComunicacionesComponent implements OnInit {
     return color;
   }
 
+  async doEditEntrega1() {
+    try {
+      this.procesando = true;
+      console.log('itm', this.item);
+      const res = await this.wsdl.doUpdate(this.item, this.item.id).then();
+      const result = JSON.parse(JSON.stringify(res));
+      if (result.status == 200) {
+        UturuncoUtils.showToas('Se actualizó correctamente', 'success');
+        this.finalizado.emit(true);
+        this.back();
+        this.cerrar1.nativeElement.click();
+      } else if (result.status == 666) {
+        // logout app o refresh token
+      } else {
+        UturuncoUtils.showToas(result.msg, 'error');
+      }
+    } catch (error: any) {
+      UturuncoUtils.showToas('Excepción: ' + error.message, 'error');
+      console.log('error', error);
+    } finally {
+      this.procesando = false;
+    }
+  }
+
+  select(item: ComIngresoEquipo) {
+    this.item = new ComIngresoEquipo();
+    this.item = item;
+  }
+
   async exportTableToExcel(tableID: any, filename = '') {
     this.exportar = true;
     await UturuncoUtils.delay(300);
     await UturuncoUtils.exportTableToExcel(tableID, filename).then();
 
     this.exportar = false;
+  }
+
+  back() {
+    this.router.navigateByUrl(this.entity);
   }
 
   scroll(value: any[]) {

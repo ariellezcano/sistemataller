@@ -173,6 +173,25 @@
 
     <hr />
     <div class="form-group">
+      <ng-container
+        *ngIf="dtItem.ordenTrabajo.id > 0; then recibo"
+      ></ng-container>
+      <ng-template #recibo>
+        <button
+          type="submit"
+          (click)="linkear(dtItem.ordenTrabajo.id)"
+          name="btn"
+          class="btn btn-secondary btn-lg btn-block float-left"
+        >
+          GENERAR RECIBO
+          <!-- <ng-container *ngIf="getProceso(); then mostrar"></ng-container>
+          <ng-template #mostrar>
+            <i class="fa fa-spinner fa-spin" aria-hidden="true"></i>
+          </ng-template> -->
+        </button>
+        &nbsp;
+      </ng-template>
+
       <button
         *ngIf="dtItems.length > 0; mostrar"
         type="submit"

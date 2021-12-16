@@ -57,8 +57,8 @@
         <br />
         <b id="nroorden">21-0000</b>
         <!-- <b>
-          {{ item.ordenTrabajo.nroOrden }}
-        </b> -->
+            {{ item.ordenTrabajo.nroOrden }}
+          </b> -->
       </div>
     </div>
     <br />
@@ -82,7 +82,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let item of items">
+          <tr>
             <td>IMPRESORA</td>
             <td>HP</td>
             <td>LASERJET 1102</td>
@@ -108,7 +108,7 @@
     <div class="row">
       <div class="col-md-6"></div>
       <div class="col-md-6">
-        <b>RESISTENCIA, {{ fecha(item?.ordenTrabajo?.ingresoFecha) }}</b>
+        <b>RESISTENCIA, {{ fecha(item?.retiraFecha) }}</b>
       </div>
     </div>
     <!-- firma de los empleados -->
@@ -124,11 +124,11 @@
           </div>
           <div class="col-md-12 b">
             <b>ACLARACION:</b>
-            {{ item?.ordenTrabajo?.ingresoRecibe?.apellido }},
-            {{ item?.ordenTrabajo?.ingresoRecibe?.nombre }}
+            {{ item?.retiraRetira?.apellido }},
+            {{ item?.retiraRetira?.nombre }}
           </div>
           <div class="col-md-12 b">
-            <b>DNI:</b> {{ item?.ordenTrabajo?.ingresoRecibe?.norDni }}
+            <b>DNI:</b> {{ item?.retiraRetira?.norDni }}
           </div>
           <div class="col-md-12 b">
             <b>JERARQUIA - Pza:</b>_____________________
@@ -148,11 +148,11 @@
           </div>
           <div class="col-md-12 b">
             <b>ACLARACION:</b>
-            {{ item?.ordenTrabajo?.ingresoEntrega?.apellido }},
-            {{ item?.ordenTrabajo?.ingresoEntrega?.nombre }}
+            {{ item?.retiraEntrega?.apellido }},
+            {{ item?.retiraEntrega?.nombre }}
           </div>
           <div class="col-md-12 b">
-            <b>DNI:</b> {{ item?.ordenTrabajo?.ingresoEntrega?.norDni }}
+            <b>DNI:</b> {{ item?.retiraEntrega?.norDni }}
           </div>
           <div class="col-md-12 b">
             <b>JERARQUIA - Pza:</b>_____________________

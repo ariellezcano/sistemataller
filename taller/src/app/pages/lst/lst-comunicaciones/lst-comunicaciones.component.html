@@ -123,3 +123,57 @@
     </div>
   </div>
 </div>
+<!-- Modal para agregar fechas a cada registro -->
+<div
+  class="modal fade"
+  id="modelId1"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="modelTitleId"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Detalle</h5>
+        <button
+          #close1
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form
+        #f="ngForm"
+        (ngSubmit)="doEditEntrega1()"
+        ngNativeValidate
+        class="was-validated"
+      >
+        <div class="modal-body" *ngIf="item">
+          <div class="row">
+            <div class="col-md-12">
+              <label for="" class="lbl lbl-success" style="font-size: 24px">
+                <legend style="color: crimson">Orden nro°:</legend>
+                {{ item?.ordenTrabajo?.nroOrden }}
+              </label>
+            </div>
+          </div>
+          <hr />
+          <app-abm-reparacion-equipo
+            [item]="itemR"
+            (finalizado)="accion($event)"
+          ></app-abm-reparacion-equipo>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">
+              Cancelar
+            </button>
+            <button type="submit" class="btn btn-primary">Guardar</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

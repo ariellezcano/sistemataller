@@ -14,11 +14,11 @@ import { EquipoIngresoService } from 'src/app/servicio/componentes/equipo-ingres
 import { UturuncoUtils } from 'src/app/utils/uturuncoUtils';
 
 @Component({
-  selector: 'app-recibo',
-  templateUrl: './recibo.component.html',
-  styleUrls: ['./recibo.component.scss'],
+  selector: 'app-recibo-entrega',
+  templateUrl: './recibo-entrega.component.html',
+  styleUrls: ['./recibo-entrega.component.scss'],
 })
-export class ReciboComponent implements OnInit {
+export class ReciboEntregaComponent implements OnInit {
   id!: number;
   aclaracion = '';
   entity = 'lst-equipos';
@@ -35,7 +35,6 @@ export class ReciboComponent implements OnInit {
 
   @Input()
   item!: ComIngresoEquipo;
-  items!: ComIngresoEquipo[];
   router: any;
 
   /*   wsdl es el servicio que se va a comunicar entre la api y la vista.
@@ -48,8 +47,6 @@ export class ReciboComponent implements OnInit {
       this.id = p.params.id;
       // this.buscar(this.id);
     });
-    this.item = new ComIngresoEquipo();
-    this.items = [];
   }
   // async buscar(id: any) {
   //   let data = await this.wsdl.doFind(id).then();

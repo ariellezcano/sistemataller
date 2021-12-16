@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
   DatoPolicial,
@@ -20,7 +20,10 @@ export class AbmReparacionEquipoComponent implements OnInit {
 
   @Output()
   cancelado: EventEmitter<Boolean> = new EventEmitter<Boolean>();
+
   /*
+
+
    * control de operaciones a realizar
    */
   entity = 'lst-equipos';
@@ -28,6 +31,7 @@ export class AbmReparacionEquipoComponent implements OnInit {
   id!: number;
   procesando!: Boolean;
   items: ReparacionEquipo[];
+  @Input()
   item: ReparacionEquipo;
 
   constructor(

@@ -30,6 +30,7 @@ import { AbmDiagnosticoComponent } from './frm-abm/abm-diagnostico/abm-diagnosti
 import { AbmDiagnosticoEquipoComponent } from './frm-abm/abm-diagnostico-equipo/abm-diagnostico-equipo.component';
 import { ComboDiagnosticoEquipoComponent } from './componentes/combo-diagnostico-equipo/combo-diagnostico-equipo.component';
 import { ReciboComponent } from './componentes/recibo/recibo.component';
+import { ReciboEntregaComponent } from './componentes/recibo-entrega/recibo-entrega.component';
 
 @NgModule({
   declarations: [
@@ -62,6 +63,7 @@ import { ReciboComponent } from './componentes/recibo/recibo.component';
     AbmDiagnosticoEquipoComponent,
     ComboDiagnosticoEquipoComponent,
     ReciboComponent,
+    ReciboEntregaComponent,
 
     //declarar paginas de pages
   ],

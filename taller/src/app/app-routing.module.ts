@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './pages/compartido/login/login.component';
+import { ReciboEntregaComponent } from './pages/componentes/recibo-entrega/recibo-entrega.component';
 import { ReciboComponent } from './pages/componentes/recibo/recibo.component';
 import { ReporteExternoComponent } from './pages/componentes/reporte-externo/reporte-externo.component';
 import { ReporteMovilesComponent } from './pages/componentes/reporte-moviles/reporte-moviles.component';
@@ -35,6 +36,15 @@ const routes: Routes = [
       {
         path: '',
         component: ReciboComponent,
+      },
+    ],
+  },
+  {
+    path: 'recibo-entrega',
+    children: [
+      {
+        path: '',
+        component: ReciboEntregaComponent,
       },
     ],
   },

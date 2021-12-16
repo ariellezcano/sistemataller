@@ -82,8 +82,8 @@
 }
 
 /*
-    The arrow size and position depends from sizes of square because I needed an arrow correct positioning from the top left corner of the element toggle
-    */
+      The arrow size and position depends from sizes of square because I needed an arrow correct positioning from the top left corner of the element toggle
+      */
 
 .toggle__text:before {
   content: "";
@@ -117,14 +117,14 @@
 }
 
 /*
-    =====
-    LEVEL 2. PRESENTATION STYLES
-    =====
-    */
+      =====
+      LEVEL 2. PRESENTATION STYLES
+      =====
+      */
 
 /* 
-    The demo skin
-    */
+      The demo skin
+      */
 
 .toggle__label:before,
 .toggle__label:after {
@@ -132,8 +132,8 @@
 }
 
 /* 
-    The animation of switching states
-    */
+      The animation of switching states
+      */
 
 .toggle__input:not(:disabled) ~ .toggle__label:before,
 .toggle__input:not(:disabled) ~ .toggle__label:after {
@@ -173,10 +173,10 @@
 }
 
 /*
-    =====
-    LEVEL 3. SETTINGS
-    =====
-    */
+      =====
+      LEVEL 3. SETTINGS
+      =====
+      */
 
 .toggle {
   --toggleColor: #148d75;

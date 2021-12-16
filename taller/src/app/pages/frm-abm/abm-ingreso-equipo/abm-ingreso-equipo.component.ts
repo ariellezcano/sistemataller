@@ -27,7 +27,7 @@ export class AbmIngresoEquipoComponent implements OnInit {
    * control de operaciones a realizar
    */
   entity = 'lst-equipos';
-
+  recibo = 'recibo';
   id!: number;
   procesando!: Boolean;
   dtItems: ComIngresoEquipo[];
@@ -225,6 +225,9 @@ export class AbmIngresoEquipoComponent implements OnInit {
     }
 
     return color;
+  }
+  linkear(id?: Number) {
+    this.router.navigateByUrl(this.recibo + '/' + id);
   }
 
   back() {
